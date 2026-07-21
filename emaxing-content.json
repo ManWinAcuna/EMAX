@@ -96,77 +96,148 @@
   },
 
   "personalDaily": {
-    "_note": "PAID tier — LIVE model (Marketing-locked multi-timeframe synthesis). emaxingPersonalDaily reads computeEnergyFlow's per-level numerology scores (yearScore/monthScore/dayScore), bands each into direction (FAVORABLE >= favMin, FRICTION < frictionMin, else NEUTRAL), then classifies the BETWEEN-level relationship: all three FAVORABLE -> 'allFavorable' (biggest cheat); a bigger<->smaller opposite-ends clash (one FAV + one FRI) -> a scaled trap, precedence 'dayYearTrap' > 'monthYearTrap' > 'dayMonthTrap' (bigger cycle wins the read); all three FRICTION -> 'allFriction' (heavy/rest); else 'flow'. Identity applied last: identityFlavor[lifePathKey][classKey] PARTIALLY overrides the base classTemplate (merge like the free tier). NEVER show numbers/scores (hidden soup) — QUALITATIVE tokens ONLY: {leadName} (cycle that wins: 'your year'|'this month'|'today'|'everything'), {trapName} (cycle to resist), {yearBand}/{monthBand}/{dayBand} ('favorable'|'neutral'|'friction'). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. All copy below is [stub] — replace in Manuel's voice.",
+    "_note": "PAID tier — LIVE model (Marketing-locked multi-timeframe synthesis), CONTENT AUTHORED in Manuel's voice. emaxingPersonalDaily reads computeEnergyFlow's per-level numerology scores (yearScore/monthScore/dayScore), bands each into direction (FAVORABLE >= favMin, FRICTION < frictionMin, else NEUTRAL), then classifies the BETWEEN-level relationship: all three FAVORABLE -> 'allFavorable' (biggest cheat); a bigger<->smaller opposite-ends clash (one FAV + one FRI) -> a scaled trap, precedence 'dayYearTrap' > 'monthYearTrap' > 'dayMonthTrap' (bigger cycle wins the read); all three FRICTION -> 'allFriction' (heavy/rest); else 'flow'. Identity applied last: identityFlavor[lifePathKey][classKey] PARTIALLY overrides the base classTemplate (merge like the free tier). NEVER show numbers/scores (hidden soup) — QUALITATIVE tokens ONLY: {leadName} (cycle that wins: 'your year'|'this month'|'today'|'everything'), {trapName} (cycle to resist), {yearBand}/{monthBand}/{dayBand} ('favorable'|'neutral'|'friction'). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. guidance strings use \\n\\n between short chunks — render each chunk on its own line/paragraph, never as one dense block (Manuel: 'small bits of straight value, not a whole paragraph').",
     "thresholds": { "favMin": 75, "frictionMin": 45 },
     "classTemplates": {
       "allFavorable": {
         "title": "🟢 Everything's Stacked",
-        "summary": "[stub] Year, month, and today all pulling the same way — the rare one.",
-        "guidance": "[stub] Your year, this month, and today are all favorable at once. This almost never lines up. Make the biggest move you've been sitting on — the whole board is behind you.",
+        "summary": "Year, month, and today all pulling the same way. The rare one.",
+        "guidance": "Every once in a while the stars actually line up.\n\nNot metaphorically. Your year, this month, and today are all saying the same thing.\n\nThat's today.\n\nWhatever you've been sitting on, waiting for the right moment — this is the right moment.\n\nDoesn't mean it happens on its own though. You still gotta take the shot.",
         "focus": "Go all-in",
-        "do": ["Make the big move while every level agrees", "Stack it — don't sit on a rare one"],
-        "avoid": ["Playing small on a day the whole board is with you"],
-        "trap": "[stub] Assuming a stacked day does the work for you — it opens the door, you still walk through.",
+        "do": ["Make the move you've been sitting on", "Go all in while every level agrees"],
+        "avoid": ["Playing small on the one day the whole board is with you"],
+        "trap": "Thinking a stacked day does the work for you. It opens the door. You still gotta walk through it.",
         "rating": 5
       },
       "dayYearTrap": {
         "title": "🔴 Don't Let Today Wreck Your Year",
-        "summary": "[stub] Today pulls one way, your year's arc the other — the biggest trap on the board.",
-        "guidance": "[stub] {leadName} is running {yearBand} while {trapName} is {dayBand}, and they're fighting. This is the widest clash there is: a single day's impulse against your whole year's direction. Play the year. Let today's pull go by.",
+        "summary": "Today pulls one way. Your year's whole arc pulls the other. Biggest trap there is.",
+        "guidance": "{leadName}'s been running one direction all year.\n\nToday though, {trapName}'s pulling the total opposite way.\n\nThat's the widest clash there is. One day against your whole year.\n\nFeel it if you gotta. Just don't act on it.\n\nLet today pass through. Keep building what your year's already building.",
         "focus": "Protect the year",
-        "do": ["Move with {leadName}, not the impulse of {trapName}"],
-        "avoid": ["Blowing up a good year over how {trapName} feels"],
-        "trap": "[stub] Letting one day's feeling override twelve months of direction.",
+        "do": ["Move with {leadName}, not today's mood"],
+        "avoid": ["Making a big call off how {trapName} feels right now"],
+        "trap": "Letting one day undo twelve months.",
         "rating": 2
       },
       "monthYearTrap": {
-        "title": "🔴 The Month vs the Year",
-        "summary": "[stub] This month and your year's arc are pulling apart.",
-        "guidance": "[stub] {leadName} is {yearBand} but {trapName} is {monthBand}. The chapter you're in this month is fighting the bigger story. Bias to the year — treat this month as a phase to manage, not the whole truth.",
+        "title": "🔴 This Month vs Your Year",
+        "summary": "This month's telling a different story than your year is.",
+        "guidance": "Your year's been telling one story.\n\nThis month's telling a different one.\n\nDon't rewrite the whole book over one chapter.\n\nRide the month out. Keep steering by the year.",
         "focus": "Zoom out",
         "do": ["Keep steering by {leadName}"],
-        "avoid": ["Rewriting the year around one hard month"],
-        "trap": "[stub] Mistaking a rough chapter for the whole book.",
+        "avoid": ["Panicking over one rough month"],
+        "trap": "Treating a hard month like it's the whole year.",
         "rating": 2
       },
       "dayMonthTrap": {
         "title": "🟠 Today vs This Month",
-        "summary": "[stub] Today's pull cuts against this month's groove.",
-        "guidance": "[stub] {trapName} is {dayBand} while {leadName} is {monthBand} — a smaller, weekly-scale clash. Don't let one off-key day knock you out of the month's rhythm. Follow the month.",
+        "summary": "Today's a little off from this month's groove. Small stuff.",
+        "guidance": "This month's had a rhythm going.\n\nToday's a little off beat. Doesn't match.\n\nSmall stuff. Don't overreact to it.\n\nStay in the month's groove. Let today be the outlier it is.",
         "focus": "Hold the rhythm",
-        "do": ["Stay with {leadName}'s groove"],
-        "avoid": ["Overcorrecting on one restless day"],
-        "trap": "[stub] Ditching a good month's habit over one off day.",
+        "do": ["Stick with the month's rhythm"],
+        "avoid": ["Blowing up a good routine over one weird day"],
+        "trap": "Ditching something that's working because of how one day feels.",
         "rating": 2
       },
       "allFriction": {
-        "title": "🔴 Heavy on Every Level",
-        "summary": "[stub] Year, month, and today all running friction — a low-battery stretch.",
-        "guidance": "[stub] Every level is fighting the current right now. This isn't the day to force outcomes — it's rest-and-consolidate. Do maintenance, protect your energy, wait for the tide to turn.",
+        "title": "⚫ Heavy on Every Level",
+        "summary": "Year, month, and today all running friction. A low-battery stretch.",
+        "guidance": "Every level's fighting you right now. Year, month, today, all of it.\n\nNot the day to force anything.\n\nThis one's for maintenance. Rest. Protect what you got.\n\nPush hard here and you just burn yourself out for nothing.",
         "focus": "Rest and hold",
-        "do": ["Handle maintenance, not big swings", "Protect your energy"],
+        "do": ["Handle the boring stuff, not the big swings", "Protect your energy"],
         "avoid": ["Forcing a big move into a headwind"],
-        "trap": "[stub] Pushing hard when every level says conserve — that's how you burn out.",
+        "trap": "Pushing when everything's telling you to conserve. That's exactly how people burn out.",
         "rating": 2
       },
       "flow": {
         "title": "⚪ Clean Lane",
-        "summary": "[stub] No clash between the levels — just execute.",
-        "guidance": "[stub] Your year, month, and today aren't fighting. No cheat code, no trap — a clean lane. Lead with {leadName} and put in the reps; steady compounds here.",
+        "summary": "No clash between the levels. Just execute.",
+        "guidance": "Nothing's fighting today. No cheat code, no trap. Just a clean lane.\n\nLead with {leadName} and put in the work.\n\nNothing dramatic here. That's fine. Steady still adds up.",
         "focus": "Execute",
-        "do": ["Steady reps on what's in front of you"],
-        "avoid": ["Waiting for drama to tell you it matters"],
-        "trap": "[stub] Treating a calm day as a day off.",
+        "do": ["Steady reps on whatever's in front of you"],
+        "avoid": ["Waiting for drama before you take it seriously"],
+        "trap": "Treating a quiet day like a day off.",
         "rating": 3
       }
     },
     "identityFlavor": {
-      "_note": "Per Life Path key (1-9, 11, 22, 33), per classKey: PARTIAL overrides merged onto the base classTemplate — author only the fields you want to change (e.g. guidance/trap). Absent = base as-is. Same clash plays differently per identity (Manuel: a Day-vs-Year trap hits a 7 as 'retreat further in', a 1 as 'the itch to charge in rash'). [stub] examples:",
+      "_note": "Per Life Path key (1-9 excl. 2, 11, 22, 33 — 2 never exists, always becomes 11), per classKey: PARTIAL overrides merged onto the base classTemplate. allFavorable carries a full guidance override to name the Life Path's specific domain (Manuel: 'everything's aligned' alone is empty, gotta say aligned FOR WHAT). Other classes override just 'trap' to flavor the same clash through that Life Path's core weakness.",
       "1": {
-        "dayYearTrap": { "trap": "[stub] For a 1, the trap is the itch to charge in and start something rash today — sit on it." }
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you specifically, that's launch mode. Whatever you've been circling — start it now.\n\nJust don't get lazy and expect it to build itself. You still gotta take the shot." },
+        "dayYearTrap": { "trap": "For a 1, the trap is the itch to charge in and start something rash today. Sit on it." },
+        "monthYearTrap": { "trap": "For a 1, a rough month makes you want to blow the whole plan up and start over. Don't." },
+        "dayMonthTrap": { "trap": "For a 1, one off day makes you want to abandon the routine and just wing it. Stay the course." },
+        "allFriction": { "trap": "For a 1, a heavy stretch makes you force a start anyway just to feel in control. That's exactly when not to." }
+      },
+      "3": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's a green light to create and put yourself out there. Post it, say it, make it.\n\nJust don't just talk about it this time. Actually finish the thing." },
+        "dayYearTrap": { "trap": "For a 3, the trap is talking up ten new ideas today instead of the one your year actually needs. Stay quiet on the new stuff." },
+        "monthYearTrap": { "trap": "For a 3, a hard month makes you scatter into five new projects instead of riding it out. Don't scatter." },
+        "dayMonthTrap": { "trap": "For a 3, one distracting day makes you drop what you were building this month. Stay on it." },
+        "allFriction": { "trap": "For a 3, a heavy stretch makes you talk your way around the work instead of resting. Rest quiet, don't perform through it." }
+      },
+      "4": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor a builder like you, that's the green light to build the big version, not just grind the small stuff.\n\nStill won't build itself. Lay the brick." },
+        "dayYearTrap": { "trap": "For a 4, the trap is grinding harder on the wrong thing today instead of stepping back. Busy isn't the same as right." },
+        "monthYearTrap": { "trap": "For a 4, a hard month makes you double down on a routine that's not even working anymore. Adjust the plan, don't just push harder." },
+        "dayMonthTrap": { "trap": "For a 4, one off day makes you skip the routine out of frustration. Show up small instead of not at all." },
+        "allFriction": { "trap": "For a 4, a heavy stretch makes you grind anyway out of habit. That's not discipline right now, that's burnout waiting." }
+      },
+      "5": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's permission to move. Say yes, change something, go somewhere.\n\nJust don't turn it into an excuse to blow everything up for no reason." },
+        "dayYearTrap": { "trap": "For a 5, the trap is chasing something new today that derails what your year's actually building. The new thing can wait." },
+        "monthYearTrap": { "trap": "For a 5, a hard month makes you want to run from the whole plan. Don't bail on the year over one restless stretch." },
+        "dayMonthTrap": { "trap": "For a 5, one restless day makes you want to ditch the month's groove entirely. Stay in it, change something small instead." },
+        "allFriction": { "trap": "For a 5, a heavy stretch makes you overindulge just to feel something. That's the trap, not the fix." }
+      },
+      "6": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's your best stretch for people. Show up for someone, deepen something real.\n\nJust don't give so much you end up running on empty." },
+        "dayYearTrap": { "trap": "For a 6, the trap is over-giving today to make up for how the year's felt. That's not the fix." },
+        "monthYearTrap": { "trap": "For a 6, a hard month makes you take on everyone else's problems instead of handling your own. Protect your plate." },
+        "dayMonthTrap": { "trap": "For a 6, one hard day makes you skip taking care of yourself to take care of everyone else. Don't." },
+        "allFriction": { "trap": "For a 6, a heavy stretch makes you call exhaustion 'helping people' and keep pouring out anyway. Rest is allowed." }
       },
       "7": {
-        "dayYearTrap": { "trap": "[stub] For a 7, the trap is retreating even further into your head today — don't disappear on the year." }
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's your sharpest thinking stretch. Study it, plan it, go deep.\n\nJust don't just think about it forever. Do something with what you find." },
+        "dayYearTrap": { "trap": "For a 7, the trap is retreating even further into your head today. Don't disappear on the year." },
+        "monthYearTrap": { "trap": "For a 7, a hard month makes you isolate completely instead of riding it out with people around. Stay reachable." },
+        "dayMonthTrap": { "trap": "For a 7, one heavy day makes you cancel on the month's momentum to go be alone. A little space is fine, don't vanish." },
+        "allFriction": { "trap": "For a 7, a heavy stretch makes you overthink your way into total paralysis. Pick one small thing and just do it." }
+      },
+      "8": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's the green light to make the power move. Handle the money, make the ask.\n\nJust don't get greedy and overreach on a good day." },
+        "dayYearTrap": { "trap": "For an 8, the trap is forcing a big power move today that your year isn't actually ready for yet. Wait for it." },
+        "monthYearTrap": { "trap": "For an 8, a hard month makes you grip control tighter instead of riding it out. Loosen the grip." },
+        "dayMonthTrap": { "trap": "For an 8, one hard day makes you push a business move the month isn't backing yet. Hold off." },
+        "allFriction": { "trap": "For an 8, a heavy stretch makes you obsess over control to compensate. That's the burnout starting." }
+      },
+      "9": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's your best window to release. Close the chapter, let go clean.\n\nDon't hang on to it just because it's comfortable." },
+        "dayYearTrap": { "trap": "For a 9, the trap is starting something new today when your year needs you finishing what's already open. Close it out first." },
+        "monthYearTrap": { "trap": "For a 9, a hard month makes you cling to something you already outgrew. Let it go." },
+        "dayMonthTrap": { "trap": "For a 9, one hard day makes you hold onto old stuff instead of following the month's push to release. Release anyway." },
+        "allFriction": { "trap": "For a 9, a heavy stretch makes your whole mood depend on who's around you. Protect your own energy first." }
+      },
+      "11": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's your gut speaking loud and clear. Trust it, and put the intensity into something physical.\n\nJust don't let the high take you somewhere reckless." },
+        "dayYearTrap": { "trap": "For an 11, the trap is an emotional spike today convincing you to blow up something your year's been building. Feel it, don't act on it." },
+        "monthYearTrap": { "trap": "For an 11, a hard month makes the emotional swings hit everyone around you. Burn it off somewhere physical instead." },
+        "dayMonthTrap": { "trap": "For an 11, one intense day makes you overreact and derail the month's momentum. Let the wave pass first." },
+        "allFriction": { "trap": "For an 11, a heavy stretch turns the intensity inward and it gets dark fast. Get it out physically, don't sit with it." }
+      },
+      "22": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's the green light to build the big version. Not the small safe one, the real one.\n\nJust make sure you're building it for you too, not just everyone else." },
+        "dayYearTrap": { "trap": "For a 22, the trap is getting overwhelmed today and shrinking the whole vision to feel safe. Don't shrink it." },
+        "monthYearTrap": { "trap": "For a 22, a hard month makes you build everyone else's thing and forget your own. Save some for you." },
+        "dayMonthTrap": { "trap": "For a 22, one heavy day makes the pressure feel like too much. It's not, it's just a day. Keep building." },
+        "allFriction": { "trap": "For a 22, a heavy stretch turns pressure into pure overwhelm. Break it down smaller, don't stop." }
+      },
+      "33": {
+        "allFavorable": { "guidance": "Every once in a while the stars actually line up. Year, month, today, all agreeing.\n\nFor you, that's your best window to teach, guide, lift someone up.\n\nJust don't do it from three steps ahead where nobody can reach you." },
+        "dayYearTrap": { "trap": "For a 33, the trap is getting so far ahead in your head today that you talk down to people without meaning to. Come back to earth." },
+        "monthYearTrap": { "trap": "For a 33, a hard month makes you isolate into your own vision instead of staying connected. Stay reachable." },
+        "dayMonthTrap": { "trap": "For a 33, one heavy day makes you distance yourself from people who actually need you this month. Stay close." },
+        "allFriction": { "trap": "For a 33, a heavy stretch makes you keep pouring into others while you're running on empty. Let someone lift you for once." }
       }
     }
   },
