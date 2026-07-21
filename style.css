@@ -11,16 +11,42 @@
   --good: #6ee7a8;
   --bad: #f7889b;
   --radius: 18px;
-  /* Day-type signal colors — UI Dev v0.1 proposed hex, placeholders until their
-     token sheet lands (then these vars get the final values). */
+  /* The one Solar action button (UI Dev Spec Sheet 2). */
+  --primary: #fb8332;
+  --primary-ink: #2a1206;
+  /* Day-type signal colors (UI Dev Spec Sheet 2 — dark defaults).
+     Near-final; swap to Manuel's exact brand hex when his assets land. */
   --state-cheat: #34d399;
   --state-flow: #94a3b8;
   --state-trap: #f7889b;
   --state-farm: #f5c451;
 }
 
+/* Light theme — dormant until a data-theme="light" toggle is wired (UI Dev Spec
+   Sheet 2). Dark stays the default live look. */
+:root[data-theme="light"] {
+  --bg: #f7f5fb;
+  --bg2: #ffffff;
+  --card: rgba(20, 10, 45, 0.03);
+  --card-border: rgba(20, 10, 45, 0.10);
+  --text: #1b1430;
+  --muted: #6a6180;
+  --accent: #7c3aed;
+  --accent2: #b5820f;
+  --primary: #f97316;
+  --primary-ink: #ffffff;
+  --state-cheat: #059669;
+  --state-farm: #b5820f;
+  --state-trap: #dc2626;
+  --state-flow: #475569;
+}
+
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
+/* Legibility floor (UI Dev Spec Sheet 2 — the "6 & 60" charter): lift the base
+   so rem-based type reads comfortably at arm's length. */
+html { font-size: 17px; }
+@media (min-width: 480px) { html { font-size: 18px; } }
 body {
   background:
     radial-gradient(1200px 600px at 50% -10%, #2a2150 0%, transparent 60%),
@@ -45,7 +71,6 @@ body {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
-.ema-logo span { font-weight: 800; }
 .ema-tag { color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
 
 /* Cards */
@@ -74,10 +99,10 @@ body {
   background: rgba(0, 0, 0, 0.25); color: var(--text); color-scheme: dark;
 }
 .ema-btn {
-  width: 100%; padding: 14px; font-size: 1.02rem; font-weight: 700;
-  border: none; border-radius: 12px; cursor: pointer; color: #1a1330;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  box-shadow: 0 8px 20px rgba(167, 139, 250, 0.25);
+  width: 100%; min-height: 56px; padding: 14px; font-size: 1.05rem; font-weight: 800;
+  border: none; border-radius: 12px; cursor: pointer;
+  background: var(--primary); color: var(--primary-ink);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 34%, transparent);
 }
 .ema-btn:active { transform: translateY(1px); }
 
@@ -137,7 +162,7 @@ body {
 /* Calendar */
 .ema-cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .ema-cal-label { font-weight: 750; font-size: 1.05rem; }
-.ema-cal-arrow { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--card-border); color: var(--text); width: 38px; height: 38px; border-radius: 10px; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+.ema-cal-arrow { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--card-border); color: var(--text); width: 56px; height: 56px; border-radius: 10px; font-size: 1.3rem; line-height: 1; cursor: pointer; }
 .ema-cal-arrow:active { transform: translateY(1px); }
 .ema-cal-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
 .ema-cal-dow span { text-align: center; font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
@@ -146,7 +171,7 @@ body {
 .ema-cal-cell.empty { background: transparent; border: none; cursor: default; }
 /* Day-type dot — color + accessible label (via aria-label/title). Base style;
    the design layer refines. */
-.ema-cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.ema-cal-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 3px; background: var(--state-flow); }
 .ema-cal-dot[data-daytype="cheat"] { background: var(--state-cheat); }
 .ema-cal-dot[data-daytype="flow"] { background: var(--state-flow); }
 .ema-cal-dot[data-daytype="trap"] { background: var(--state-trap); }
@@ -170,3 +195,29 @@ body {
 .ema-foot { text-align: center; margin-top: 4px; }
 .ema-foot-link { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
 .ema-legal { text-align: center; color: var(--muted); font-size: 0.72rem; margin-top: 22px; opacity: 0.7; }
+
+/* ============================================================================
+   Design layer — UI Dev Spec Sheet 2. Legibility floor + the day-type banner.
+   These intentionally raise values set above, so they stay last to win.
+   ============================================================================ */
+
+/* Lift the smallest type to the readable floor. */
+.ema-focus, .ema-trap-text, .ema-list, .ema-guidance { font-size: 1rem; }
+.ema-num-label, .ema-cal-dow span, .ema-card-eyebrow,
+.ema-doavoid-label, .ema-trap-label { font-size: 0.8rem; }
+
+/* Day-type banner — promotes the existing .ema-advice-title into a color-coded
+   banner off the container's data-daytype (set by app.js / calendar-app.js).
+   No new markup; the color is always paired with the emoji + name in the text. */
+[data-daytype] .ema-advice-title {
+  --c: var(--state-flow);
+  display: block; padding: 13px 15px; margin: 0 0 12px; border-radius: 14px;
+  font-size: 1.25rem; font-weight: 800; line-height: 1.2;
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  border-left: 6px solid var(--c);
+  background: color-mix(in srgb, var(--c) 15%, var(--card));
+}
+[data-daytype="cheat"] .ema-advice-title { --c: var(--state-cheat); }
+[data-daytype="farm"]  .ema-advice-title { --c: var(--state-farm); }
+[data-daytype="trap"]  .ema-advice-title { --c: var(--state-trap); }
+[data-daytype="flow"]  .ema-advice-title { --c: var(--state-flow); }
