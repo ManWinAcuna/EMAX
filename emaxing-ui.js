@@ -10,6 +10,13 @@ function emaStars(n) {
   return '★'.repeat(n) + '☆'.repeat(5 - n);
 }
 
+// Maps the engine's classKey to the UI day-type token the design layer styles
+// against (data-daytype). synergy=Cheat Code, flow=Flow, trap=Matrix Trap,
+// bestOfBoth=Hardest to Farm.
+const EMA_DAYTYPE = { synergy: 'cheat', flow: 'flow', trap: 'trap', bestOfBoth: 'farm' };
+const EMA_DAYTYPE_LABEL = { cheat: 'Cheat Code', flow: 'Flow', trap: 'Matrix Trap', farm: 'Hardest to Farm' };
+function emaDaytype(classKey) { return EMA_DAYTYPE[classKey] || 'flow'; }
+
 // Renders an AdviceEntry (title / focus+rating / summary / guidance / do+avoid).
 function emaAdviceHtml(entry) {
   if (!entry) return '<div class="ema-empty">Reading coming soon.</div>';

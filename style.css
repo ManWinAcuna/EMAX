@@ -11,6 +11,12 @@
   --good: #6ee7a8;
   --bad: #f7889b;
   --radius: 18px;
+  /* Day-type signal colors — UI Dev v0.1 proposed hex, placeholders until their
+     token sheet lands (then these vars get the final values). */
+  --state-cheat: #34d399;
+  --state-flow: #94a3b8;
+  --state-trap: #f7889b;
+  --state-farm: #f5c451;
 }
 
 * { box-sizing: border-box; }
@@ -136,8 +142,16 @@ body {
 .ema-cal-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 6px; }
 .ema-cal-dow span { text-align: center; font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
 .ema-cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-.ema-cal-cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; border-radius: 10px; border: 1px solid transparent; background: rgba(0, 0, 0, 0.22); color: var(--text); font-size: 0.95rem; cursor: pointer; padding: 0; }
+.ema-cal-cell { aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 10px; border: 1px solid transparent; background: rgba(0, 0, 0, 0.22); color: var(--text); font-size: 0.95rem; cursor: pointer; padding: 0; }
 .ema-cal-cell.empty { background: transparent; border: none; cursor: default; }
+/* Day-type dot — color + accessible label (via aria-label/title). Base style;
+   the design layer refines. */
+.ema-cal-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); }
+.ema-cal-dot[data-daytype="cheat"] { background: var(--state-cheat); }
+.ema-cal-dot[data-daytype="flow"] { background: var(--state-flow); }
+.ema-cal-dot[data-daytype="trap"] { background: var(--state-trap); }
+.ema-cal-dot[data-daytype="farm"] { background: var(--state-farm); }
+.ema-cal-cell.selected .ema-cal-dot { background: rgba(26, 19, 48, 0.65); }
 .ema-cal-cell.today { border-color: var(--accent); color: var(--accent); font-weight: 750; }
 .ema-cal-cell.selected { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #1a1330; font-weight: 750; }
 

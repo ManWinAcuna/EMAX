@@ -32,7 +32,9 @@ function emaRenderFreeDaily() {
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const daily = emaxingTwoNumberDaily(today, emaxingContent);
   const dateLabel = today.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
-  document.getElementById('emaFreeDaily').innerHTML = `
+  const el = document.getElementById('emaFreeDaily');
+  el.setAttribute('data-daytype', emaDaytype(daily.classKey)); // UI hook for the day-type banner
+  el.innerHTML = `
     <div class="ema-card-eyebrow">Energy Maxing for the Day · ${emaEsc(dateLabel)}</div>
     <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayOfMonth)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
     ${emaAdviceHtml(daily.entry)}`;

@@ -25,10 +25,13 @@ function emaRenderCalendar() {
   for (let i = 0; i < startDow; i++) html += '<div class="ema-cal-cell empty"></div>';
   for (let d = 1; d <= daysInMonth; d++) {
     const date = new Date(emaCalYear, emaCalMonth, d);
+    const dt = emaDaytype(emaxingTwoNumberDaily(date, emaxingContent).classKey);
     const cls = ['ema-cal-cell'];
     if (emaSameDay(date, today)) cls.push('today');
     if (emaSelected && emaSameDay(date, emaSelected)) cls.push('selected');
-    html += `<button class="${cls.join(' ')}" data-day="${d}">${d}</button>`;
+    // Per-day type indicator: a dot (color) PLUS an accessible label (never color
+    // alone). The design layer styles .ema-cal-dot[data-daytype].
+    html += `<button class="${cls.join(' ')}" data-day="${d}" data-daytype="${dt}" title="${d} · ${EMA_DAYTYPE_LABEL[dt]}"><span class="ema-cal-daynum">${d}</span><span class="ema-cal-dot" data-daytype="${dt}" aria-label="${EMA_DAYTYPE_LABEL[dt]}"></span></button>`;
   }
   grid.innerHTML = html;
 }
@@ -36,6 +39,7 @@ function emaRenderCalendar() {
 function emaRenderCalDetail() {
   const el = document.getElementById('emaCalDetail');
   const daily = emaxingTwoNumberDaily(emaSelected, emaxingContent);
+  el.setAttribute('data-daytype', emaDaytype(daily.classKey)); // UI hook for the day-type banner
   const label = emaSelected.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   el.innerHTML = `
     <div class="ema-card-eyebrow">${emaEsc(label)}</div>
