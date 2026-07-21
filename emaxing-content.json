@@ -1,58 +1,107 @@
 {
-  "_note": "STUB CONTENT for wiring/demo only. Marketing session authors real copy. AdviceEntry = {title, summary, guidance, focus, do[], avoid[], rating}. FREE daily = the two-number model in 'freeDaily' below (universalDay single-number block is SUPERSEDED, kept for reference only). PAID daily = personalDay keyed by number ('1'-'9','11','22','33'), with lifePathOverlay[lifePath][personalDay] an optional partial merged over it (overlay fields win, base is the fallback).",
+  "_note": "FREE-TIER content authored by marketing session (Manuel's voice). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. 'trap' is a NEW field per Manuel: every reading surfaces a matrix trap, even good days — surface it prominently as the daily hook ('today's trap'). FREE daily = two-number model in 'freeDaily'. universalDay = SUPERSEDED single-number stub (reference only). PAID (personalDay + lifePathOverlay) still STUBS — next phase.",
 
   "numbers": {
-    "_note": "Per-number energy blocks. A = the day-of-month number's block, B = the universal-day number's block. Class templates weave these via {A.energy}/{A.move}/{A.trap}/{B.energy}/{B.move}/{B.trap}. Keys: 1-9, 11, 22, 33 (+ karmic 13/28, pending Manuel's final copy). STUB values - marketing replaces.",
-    "1": { "energy": "fresh starts", "move": "start or lead something", "trap": "impatience" },
-    "2": { "energy": "connection", "move": "cooperate and smooth things over", "trap": "over-sensitivity" },
-    "3": { "energy": "creativity", "move": "create and express", "trap": "scattering your focus" },
-    "4": { "energy": "routine and structure", "move": "build and organize", "trap": "rigidity" },
-    "5": { "energy": "change and freedom", "move": "move, adapt, try something new", "trap": "recklessness" },
-    "6": { "energy": "care and responsibility", "move": "show up for people", "trap": "over-giving" },
-    "7": { "energy": "reflection", "move": "go inward and study", "trap": "isolating" },
-    "8": { "energy": "power and money", "move": "execute and go get it", "trap": "control battles" },
-    "9": { "energy": "completion", "move": "finish and release", "trap": "clinging to what's done" },
-    "11": { "energy": "intuition", "move": "trust the signal", "trap": "nervous overwhelm" },
-    "22": { "energy": "master building", "move": "make the big vision concrete", "trap": "pressure and overwhelm" },
-    "33": { "energy": "compassionate service", "move": "uplift or teach someone", "trap": "martyrdom" },
-    "13": { "energy": "transformation through work", "move": "grind through the reset", "trap": "resisting the change" },
-    "28": { "energy": "independent leadership", "move": "lead on your own terms", "trap": "control struggles" }
+    "_note": "Per-number energy blocks. A = day-of-month number's block, B = universal-day number's block. Class templates weave these via {A.energy}/{A.move}/{A.trap}/{B.energy}/{B.move}/{B.trap}. Keys 1-9, 11, 22, 33, 13 are real. 28 folds to 1 (Manuel: reduce 28 -> 1 in the reducer; this entry is a fallback).",
+    "1": { "energy": "starting and first moves", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" },
+    "2": { "energy": "patience and partnership", "move": "collaborate and let it come to you", "trap": "waiting for certainty until the window closes" },
+    "3": { "energy": "creativity and connection", "move": "create, post, reach out, add play", "trap": "all hype, no finish — you talk it and never ship it" },
+    "4": { "energy": "routine and structure", "move": "put in the reps and build the base", "trap": "grinding on autopilot, mistaking busy for progress" },
+    "5": { "energy": "change and freedom", "move": "switch it up, say yes, get moving", "trap": "zero impulse control — freedom turns into self-sabotage" },
+    "6": { "energy": "love and responsibility", "move": "show up for your people and handle yours", "trap": "over-giving till you're empty, or calling laziness self-care" },
+    "7": { "energy": "analysis and solitude", "move": "research, plan, go quiet, find the pattern", "trap": "overthinking into paralysis and isolating" },
+    "8": { "energy": "power and money", "move": "make the power move and handle the money", "trap": "boom-and-bust — overreaching and burning out" },
+    "9": { "energy": "finishing and releasing", "move": "close loops and let go of what's done", "trap": "the itch to START — but 9 is endings, so it won't stick" },
+    "11": { "energy": "magnetism and raw intuition", "move": "trust your gut and burn the intensity into a physical outlet", "trap": "the live wire torches you and everyone near you if you don't burn it clean" },
+    "22": { "energy": "big vision made real", "move": "build the thing that outlasts you", "trap": "building everyone else's dream and ending up empty-handed" },
+    "33": { "energy": "influence and teaching", "move": "share what you know and lift the room", "trap": "getting so far ahead you start looking down on people" },
+    "13": { "energy": "the power of creation — 1 sparks it, 3 shapes it, then it grounds into a 4", "move": "make it REAL: start it, get creative, then ground it and pound the work", "trap": "falling in love with the idea and skipping the grind — no work, no creation" },
+    "28": { "energy": "starting and first moves (28 reduces to 1)", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" }
   },
 
   "freeDaily": {
-    "_note": "Two-number model: dayOfMonth (pure 1-9) x universalDay (1-9, 11, 22, 33). Engine scores the pair with numerologyCompat, then classifies: score>=thresholds.synergyMin -> 'synergy'; >=flowMin -> 'flow'; else LOW, which splits editorially via lowSplit[pairKey] into 'trap' (default) or 'bestOfBoth'. Wording = classTemplates[class], optionally overridden by heroPairs[pairKey]. pairKey = '<dayOfMonth>x<universalDay>' e.g. '1x9', '3x11'. A single compat score CANNOT tell trap from bestOfBoth (both can be low), so lowSplit is where you encode Manuel's rule per pair.",
+    "_note": "Two-number model: dayOfMonth (pure 1-9) x universalDay (1-9, 11, 22, 33, 13; fold 28->1). Engine scores the pair with numerologyCompat, then classifies: score>=thresholds.synergyMin -> 'synergy' (Cheat Code); >=flowMin -> 'flow'; else LOW, split editorially via lowSplit[pairKey] into 'trap' (default) or 'bestOfBoth'. heroPairs[pairKey] overrides the class template for a named archetype. lowSplit only needs the bestOfBoth exceptions — everything low defaults to trap. Expand lowSplit/heroPairs over time.",
     "thresholds": { "synergyMin": 75, "flowMin": 45 },
     "classTemplates": {
-      "synergy": { "title": "Cheat Code", "summary": "[stub] Both currents point the same way - a glitch in the matrix in your favor.", "guidance": "[stub] The date carries {dayOfMonth} energy ({A.energy}) and today's universal number is {universalDay} ({B.energy}) - they stack. {A.move} and the day backs you. Rare free lunch; use it.", "focus": "Run the cheat code", "do": ["{A.move}"], "avoid": ["{A.trap}"], "rating": 5 },
-      "flow": { "title": "Flow Day", "summary": "[stub] Two different energies, no friction.", "guidance": "[stub] The date's {A.energy} ({dayOfMonth}) and the day's {B.energy} ({universalDay}) sit fine together - steady, no fight. {A.move} without overthinking.", "focus": "Keep it moving", "do": ["{A.move}"], "avoid": ["{B.trap}"], "rating": 3 },
-      "trap": { "title": "Matrix Trap", "summary": "[stub] The two numbers fight over the SAME move - the obvious play quietly misfires.", "guidance": "[stub] The date is a {dayOfMonth} ({A.energy}) but the day itself runs {universalDay} ({B.energy}) - pulling opposite on the same action. The urge to {A.move} feels right and fizzles. Don't force it today.", "focus": "Resist the itch", "do": ["Wait a beat on the obvious move"], "avoid": ["{A.trap}"], "rating": 1 },
-      "bestOfBoth": { "title": "Hardest to Farm", "summary": "[stub] Two different lanes you can run at once.", "guidance": "[stub] The date's a {dayOfMonth} ({A.energy}) and the day's a {universalDay} ({B.energy}) - different lanes, both real. Don't blend them into mush; {A.move} AND {B.move}, on purpose. The rare day you get both.", "focus": "Do both, deliberately", "do": ["{A.move}", "{B.move}"], "avoid": ["Merging them into one thing"], "rating": 4 }
+      "synergy": {
+        "title": "🟢 Cheat Code Day",
+        "summary": "Day {dayOfMonth} × Universal {universalDay} — the code's cracked.",
+        "guidance": "{A.energy} and {B.energy} are pulling the exact same way today — the matrix left a door open. What usually takes force just flows. Energy max by going all in while the glitch is live: {A.move}, and stack the wins while you can.",
+        "focus": "Ride the glitch",
+        "do": ["Go all-in while it's easy", "Stack wins — don't sit on it"],
+        "avoid": ["Coasting and wasting a rare one"],
+        "trap": "Thinking the cheat code does the work for you. It opens the door — you still gotta walk through.",
+        "rating": 5
+      },
+      "flow": {
+        "title": "⚪ Flow Day",
+        "summary": "Day {dayOfMonth} × Universal {universalDay} — clean lane, no drama.",
+        "guidance": "{A.energy} and {B.energy} sit fine together today — no clash, no cheat code, just a clean lane to execute in. Energy max by leaning into {A.move} with a little {B.energy} on the side.",
+        "focus": "Just execute",
+        "do": ["Steady reps — handle what's in front of you"],
+        "avoid": ["Sleepwalking because nothing's dramatic"],
+        "trap": "Treating a quiet day as a day off. Steady doesn't mean checked out.",
+        "rating": 3
+      },
+      "trap": {
+        "title": "🔴 Matrix Trap Day",
+        "summary": "Day {dayOfMonth} × Universal {universalDay} — read the fine print.",
+        "guidance": "The date's a {dayOfMonth}, so you'll FEEL the pull to {A.move}. But the universal current's a {universalDay} — it wants the opposite. That itch is the trap; everyone falls for it subconsciously and wonders why nothing lands. Energy max by ignoring the impulse and playing the {universalDay} instead: {B.move}.",
+        "focus": "Don't take the bait",
+        "do": ["{B.move}", "Sit on the obvious move before you act"],
+        "avoid": ["{A.move} on autopilot — that's the bait"],
+        "trap": "{A.trap} — and today the whole day is built to bait you into it.",
+        "rating": 2
+      },
+      "bestOfBoth": {
+        "title": "🟡 Hardest to Farm",
+        "summary": "Day {dayOfMonth} × Universal {universalDay} — two worlds at once.",
+        "guidance": "Two different worlds today: the date's a {dayOfMonth} ({A.energy}) and the universal's a {universalDay} ({B.energy}). Neither's wrong — but you gotta serve both at once, which is what makes these the hardest to farm. Energy max by MERGING them: {A.move}, but do it {B.energy}-style.",
+        "focus": "AND, not OR",
+        "do": ["Do both at once — merge them", "{A.move} in a {B.energy} way"],
+        "avoid": ["Going all-in on one and ghosting the other", "Freezing because you can't pick"],
+        "trap": "Picking the world you feel and ignoring the other — or freezing. The play is AND, not OR.",
+        "rating": 3
+      }
     },
     "lowSplit": {
+      "_note": "Only list bestOfBoth exceptions; unlisted low pairs default to trap. Direction is dayOfMonth x universalDay, so list both orders. Grow this as Manuel identifies more 'best of both' days.",
       "4x3": "bestOfBoth",
-      "1x9": "trap"
+      "3x4": "bestOfBoth",
+      "1x9": "trap",
+      "9x1": "trap"
     },
     "heroPairs": {
-      "1x9": { "title": "The Quiet Misfire", "guidance": "[stub hero] Day 1 begs you to start; Universal 9 is a closing energy. Starting today feels right and quietly fizzles - finish something instead." }
+      "1x9": {
+        "title": "🔴 Matrix Trap Day",
+        "summary": "Day 1 × Universal 9 — the classic trap.",
+        "guidance": "This day is pure START energy — new project, new chapter, big move. Twist: it's a 9 universal day, and 9 is FINISH energy, not start. So everybody subconsciously feels the itch to launch something life-changing today, and it quietly won't stick. Energy max by closing loops, not opening them — finish what's already on your plate.",
+        "focus": "Close, don't open",
+        "do": ["Finish what's already open", "Tie off the old chapter"],
+        "avoid": ["Starting something 'life-changing' today"],
+        "trap": "The itch to start. It's the strongest bait on the board — start now and you'll pay double to make it stick.",
+        "rating": 2
+      },
+      "4x3": {
+        "title": "🟡 Hardest to Farm",
+        "summary": "Day 4 × Universal 3 — routine meets play.",
+        "guidance": "The date's a 4 — routine, discipline, get your work in, hit the gym. But the universal's a 3: creativity, connection, being a kid. Two different worlds, and today you gotta live in both — one of the hardest days to farm. Energy max by getting creative WITH your structure: switch up the workout, find a fresh way to run the routine, and if it's already dialed, actually have fun with it.",
+        "focus": "Creative discipline",
+        "do": ["Switch up the routine — keep the routine", "Make the work fun"],
+        "avoid": ["Grinding joylessly", "Blowing off the routine to 'be free'"],
+        "trap": "Picking one world — all grind or all play. Today only pays if you do both.",
+        "rating": 3
+      }
     }
   },
 
   "universalDay": {
-    "1": { "title": "Fresh Start", "summary": "A day the collective clock resets to one.", "guidance": "[stub] Universal 1 favors initiating over finishing. Plant, don't harvest.", "focus": "Initiate", "do": ["Start the thing", "Lead"], "avoid": ["Waiting for permission"], "rating": 4 },
-    "2": { "title": "Slow & Connect", "summary": "A cooperative, sensitive tone in the air.", "guidance": "[stub] Universal 2 rewards patience and partnership over force.", "focus": "Harmonize", "do": ["Listen", "Pair up"], "avoid": ["Pushing hard"], "rating": 3 },
-    "3": { "title": "Express", "summary": "Social, creative, light energy.", "guidance": "[stub] Universal 3 lifts communication and play.", "focus": "Create", "do": ["Share ideas", "Be seen"], "avoid": ["Scattering"], "rating": 4 },
-    "4": { "title": "Build", "summary": "Grounded, work-it-out energy.", "guidance": "[stub] Universal 4 rewards structure and follow-through.", "focus": "Work", "do": ["Do the boring reps", "Organize"], "avoid": ["Cutting corners"], "rating": 3 },
-    "5": { "title": "Change", "summary": "Restless, freedom-seeking current.", "guidance": "[stub] Universal 5 favors movement and the unexpected.", "focus": "Adapt", "do": ["Say yes to new", "Move your body"], "avoid": ["Rigid plans"], "rating": 4 },
-    "6": { "title": "Care", "summary": "Home, love and responsibility come forward.", "guidance": "[stub] Universal 6 rewards showing up for people.", "focus": "Nurture", "do": ["Tend relationships", "Beautify a space"], "avoid": ["Over-giving"], "rating": 4 },
-    "7": { "title": "Reflect", "summary": "Quiet, inward, analytical tone.", "guidance": "[stub] Universal 7 favors depth over noise.", "focus": "Study", "do": ["Go inward", "Research"], "avoid": ["Forcing social"], "rating": 3 },
-    "8": { "title": "Power", "summary": "Ambition, money and results are lit.", "guidance": "[stub] Universal 8 rewards decisive, businesslike moves.", "focus": "Achieve", "do": ["Make the ask", "Handle money"], "avoid": ["Ego clashes"], "rating": 4 },
-    "9": { "title": "Release", "summary": "Endings, compassion, letting go.", "guidance": "[stub] Universal 9 favors completion and generosity.", "focus": "Complete", "do": ["Finish & forgive", "Give"], "avoid": ["Starting big things"], "rating": 3 },
-    "11": { "title": "Insight", "summary": "A charged, intuitive master current.", "guidance": "[stub] Universal 11 heightens intuition and inspiration.", "focus": "Attune", "do": ["Trust the hunch", "Inspire"], "avoid": ["Nervy overwhelm"], "rating": 5 },
-    "22": { "title": "Master Build", "summary": "Big-vision, make-it-real energy.", "guidance": "[stub] Universal 22 supports turning a large vision practical.", "focus": "Manifest", "do": ["Think big AND concrete"], "avoid": ["Playing small"], "rating": 5 },
-    "33": { "title": "Uplift", "summary": "Healing, teaching, service tone.", "guidance": "[stub] Universal 33 favors compassionate service.", "focus": "Serve", "do": ["Help someone up"], "avoid": ["Martyrdom"], "rating": 5 }
+    "_note": "SUPERSEDED single-number stub — kept for reference only; freeDaily is the live free model.",
+    "1": { "title": "Fresh Start", "summary": "A day the collective clock resets to one.", "guidance": "[stub] Universal 1 favors initiating over finishing. Plant, don't harvest.", "focus": "Initiate", "do": ["Start the thing", "Lead"], "avoid": ["Waiting for permission"], "rating": 4 }
   },
 
   "personalDay": {
+    "_note": "PAID tier — STUBS. Next phase after the free tier ships.",
     "1": { "title": "Your Momentum Day", "summary": "Your personal reset - initiate.", "guidance": "[stub] On your Personal Day 1, start what you've been circling.", "focus": "Begin", "do": ["Launch one thing", "Decide"], "avoid": ["Dwelling on the past"], "rating": 4 },
     "2": { "title": "Your Patience Day", "summary": "Ease off the gas; connect.", "guidance": "[stub] Personal Day 2 rewards tact and teamwork.", "focus": "Connect", "do": ["Mend a bridge", "Cooperate"], "avoid": ["Forcing outcomes"], "rating": 3 },
     "3": { "title": "Your Expression Day", "summary": "Create and be social.", "guidance": "[stub] Personal Day 3 lifts your voice and charm.", "focus": "Express", "do": ["Post/create", "Reach out"], "avoid": ["Overcommitting"], "rating": 4 },
@@ -68,6 +117,7 @@
   },
 
   "lifePathOverlay": {
+    "_note": "PAID tier — STUBS. Next phase.",
     "7": {
       "1": { "guidance": "[stub overlay] As a Life Path 7 on a Personal Day 1, begin quietly and on your own terms - a private start beats a public one.", "do": ["Start solo", "Research before you leap"] },
       "8": { "guidance": "[stub overlay] LP7 on a Personal Day 8: let your analysis, not hustle, drive the power move." }

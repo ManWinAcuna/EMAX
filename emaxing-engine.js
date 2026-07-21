@@ -77,7 +77,11 @@ function emaxingTwoNumberDaily(targetDate, content) {
   const cfg = (content && content.freeDaily) || {};
   const dayOfMonth = emaxingDigit1to9(targetDate.getDate());
   const universalInfo = compatLifePathInfo(targetDate);
-  const universalDay = universalInfo.lookupValue; // 1-9, 11, 22, 33 (or karmic 28)
+  // Universal axis keeps masters 11/22/33 and karmic 13, but folds 28 -> 1
+  // (Manuel's rule).
+  let universalDay = universalInfo.lookupValue;
+  let universalDisplay = universalInfo.display;
+  if (universalDay === 28) { universalDay = 1; universalDisplay = '1'; }
   const score = numerologyCompat(dayOfMonth, universalDay);
   const pairKey = dayOfMonth + 'x' + universalDay;
 
@@ -100,7 +104,7 @@ function emaxingTwoNumberDaily(targetDate, content) {
   const tokenMap = {
     dayOfMonth: dayOfMonth,
     universalDay: universalDay,
-    universalDisplay: universalInfo.display,
+    universalDisplay: universalDisplay,
     'A.energy': A.energy, 'A.move': A.move, 'A.trap': A.trap,
     'B.energy': B.energy, 'B.move': B.move, 'B.trap': B.trap,
   };
@@ -108,7 +112,7 @@ function emaxingTwoNumberDaily(targetDate, content) {
   return {
     dayOfMonth,
     universalDay,
-    universalDisplay: universalInfo.display,
+    universalDisplay: universalDisplay,
     score,
     pairKey,
     classKey,

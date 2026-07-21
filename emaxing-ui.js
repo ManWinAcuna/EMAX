@@ -20,6 +20,7 @@ function emaAdviceHtml(entry) {
     ${entry.focus != null || entry.rating != null ? `<div class="ema-focus">${entry.focus != null ? `Focus · <b>${emaEsc(entry.focus)}</b>` : ''}${entry.rating != null ? ` <span class="ema-stars" title="Energy ${emaEsc(entry.rating)}/5">${emaStars(entry.rating)}</span>` : ''}</div>` : ''}
     ${entry.summary ? `<p class="ema-summary">${emaEsc(entry.summary)}</p>` : ''}
     ${entry.guidance ? `<p class="ema-guidance">${emaEsc(entry.guidance)}</p>` : ''}
+    ${entry.trap ? `<div class="ema-trap"><span class="ema-trap-label">⚠️ Today's trap</span><span class="ema-trap-text">${emaEsc(entry.trap)}</span></div>` : ''}
     ${(entry.do || entry.avoid) ? `<div class="ema-doavoid">
       ${entry.do ? `<div class="ema-do"><span class="ema-doavoid-label">Do</span>${list(entry.do, 'do')}</div>` : ''}
       ${entry.avoid ? `<div class="ema-avoid"><span class="ema-doavoid-label">Avoid</span>${list(entry.avoid, 'avoid')}</div>` : ''}

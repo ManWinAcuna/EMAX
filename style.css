@@ -97,6 +97,12 @@ body {
 .ema-stars { color: var(--accent2); letter-spacing: 1px; margin-left: 4px; }
 .ema-summary { font-size: 1.02rem; margin: 0 0 8px; }
 .ema-guidance { color: #d7d3ec; margin: 0 0 14px; line-height: 1.5; }
+/* Today's trap — the daily hook, surfaced on every reading */
+.ema-trap { display: block; margin: 0 0 14px; padding: 11px 13px; border-radius: 12px;
+  background: rgba(247, 136, 155, 0.10); border: 1px solid rgba(247, 136, 155, 0.35); }
+.ema-trap-label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--bad); margin-bottom: 3px; }
+.ema-trap-text { font-size: 0.92rem; color: #f2d9df; line-height: 1.45; }
+
 .ema-doavoid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ema-doavoid-label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin-bottom: 4px; }
 .ema-do .ema-doavoid-label { color: var(--good); }
