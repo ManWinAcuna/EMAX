@@ -1,0 +1,43 @@
+{
+  "_note": "STUB CONTENT for wiring/demo only. Marketing session authors the real copy. Schema: universalDay + personalDay keyed by number ('1'-'9','11','22','33'); lifePathOverlay[lifePath][personalDay] is an optional partial that merges over personalDay (overlay fields win, base is always the fallback). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], rating}.",
+
+  "universalDay": {
+    "1": { "title": "Fresh Start", "summary": "A day the collective clock resets to one.", "guidance": "[stub] Universal 1 favors initiating over finishing. Plant, don't harvest.", "focus": "Initiate", "do": ["Start the thing", "Lead"], "avoid": ["Waiting for permission"], "rating": 4 },
+    "2": { "title": "Slow & Connect", "summary": "A cooperative, sensitive tone in the air.", "guidance": "[stub] Universal 2 rewards patience and partnership over force.", "focus": "Harmonize", "do": ["Listen", "Pair up"], "avoid": ["Pushing hard"], "rating": 3 },
+    "3": { "title": "Express", "summary": "Social, creative, light energy.", "guidance": "[stub] Universal 3 lifts communication and play.", "focus": "Create", "do": ["Share ideas", "Be seen"], "avoid": ["Scattering"], "rating": 4 },
+    "4": { "title": "Build", "summary": "Grounded, work-it-out energy.", "guidance": "[stub] Universal 4 rewards structure and follow-through.", "focus": "Work", "do": ["Do the boring reps", "Organize"], "avoid": ["Cutting corners"], "rating": 3 },
+    "5": { "title": "Change", "summary": "Restless, freedom-seeking current.", "guidance": "[stub] Universal 5 favors movement and the unexpected.", "focus": "Adapt", "do": ["Say yes to new", "Move your body"], "avoid": ["Rigid plans"], "rating": 4 },
+    "6": { "title": "Care", "summary": "Home, love and responsibility come forward.", "guidance": "[stub] Universal 6 rewards showing up for people.", "focus": "Nurture", "do": ["Tend relationships", "Beautify a space"], "avoid": ["Over-giving"], "rating": 4 },
+    "7": { "title": "Reflect", "summary": "Quiet, inward, analytical tone.", "guidance": "[stub] Universal 7 favors depth over noise.", "focus": "Study", "do": ["Go inward", "Research"], "avoid": ["Forcing social"], "rating": 3 },
+    "8": { "title": "Power", "summary": "Ambition, money and results are lit.", "guidance": "[stub] Universal 8 rewards decisive, businesslike moves.", "focus": "Achieve", "do": ["Make the ask", "Handle money"], "avoid": ["Ego clashes"], "rating": 4 },
+    "9": { "title": "Release", "summary": "Endings, compassion, letting go.", "guidance": "[stub] Universal 9 favors completion and generosity.", "focus": "Complete", "do": ["Finish & forgive", "Give"], "avoid": ["Starting big things"], "rating": 3 },
+    "11": { "title": "Insight", "summary": "A charged, intuitive master current.", "guidance": "[stub] Universal 11 heightens intuition and inspiration.", "focus": "Attune", "do": ["Trust the hunch", "Inspire"], "avoid": ["Nervy overwhelm"], "rating": 5 },
+    "22": { "title": "Master Build", "summary": "Big-vision, make-it-real energy.", "guidance": "[stub] Universal 22 supports turning a large vision practical.", "focus": "Manifest", "do": ["Think big AND concrete"], "avoid": ["Playing small"], "rating": 5 },
+    "33": { "title": "Uplift", "summary": "Healing, teaching, service tone.", "guidance": "[stub] Universal 33 favors compassionate service.", "focus": "Serve", "do": ["Help someone up"], "avoid": ["Martyrdom"], "rating": 5 }
+  },
+
+  "personalDay": {
+    "1": { "title": "Your Momentum Day", "summary": "Your personal reset - initiate.", "guidance": "[stub] On your Personal Day 1, start what you've been circling.", "focus": "Begin", "do": ["Launch one thing", "Decide"], "avoid": ["Dwelling on the past"], "rating": 4 },
+    "2": { "title": "Your Patience Day", "summary": "Ease off the gas; connect.", "guidance": "[stub] Personal Day 2 rewards tact and teamwork.", "focus": "Connect", "do": ["Mend a bridge", "Cooperate"], "avoid": ["Forcing outcomes"], "rating": 3 },
+    "3": { "title": "Your Expression Day", "summary": "Create and be social.", "guidance": "[stub] Personal Day 3 lifts your voice and charm.", "focus": "Express", "do": ["Post/create", "Reach out"], "avoid": ["Overcommitting"], "rating": 4 },
+    "4": { "title": "Your Foundation Day", "summary": "Grind, in a good way.", "guidance": "[stub] Personal Day 4 is for structure and cleanup.", "focus": "Ground", "do": ["Handle admin", "Build the base"], "avoid": ["Impulse moves"], "rating": 3 },
+    "5": { "title": "Your Freedom Day", "summary": "Break routine; say yes.", "guidance": "[stub] Personal Day 5 favors change and adventure.", "focus": "Explore", "do": ["Try something new"], "avoid": ["Overindulging"], "rating": 4 },
+    "6": { "title": "Your Heart Day", "summary": "People and home first.", "guidance": "[stub] Personal Day 6 rewards care and responsibility.", "focus": "Care", "do": ["Show up for someone"], "avoid": ["People-pleasing"], "rating": 4 },
+    "7": { "title": "Your Inner Day", "summary": "Rest, think, recharge.", "guidance": "[stub] Personal Day 7 favors solitude and insight.", "focus": "Reflect", "do": ["Take quiet time", "Learn"], "avoid": ["Big social pushes"], "rating": 3 },
+    "8": { "title": "Your Power Day", "summary": "Go get it - money and results.", "guidance": "[stub] Personal Day 8 backs bold, businesslike action.", "focus": "Execute", "do": ["Make the move", "Negotiate"], "avoid": ["Recklessness"], "rating": 5 },
+    "9": { "title": "Your Closing Day", "summary": "Wrap up and release.", "guidance": "[stub] Personal Day 9 favors finishing and letting go.", "focus": "Release", "do": ["Complete", "Declutter"], "avoid": ["Launching new"], "rating": 3 },
+    "11": { "title": "Your Intuition Day", "summary": "Signal is strong - listen.", "guidance": "[stub] Personal Day 11 heightens intuition; note what you sense.", "focus": "Tune In", "do": ["Follow the nudge"], "avoid": ["Second-guessing"], "rating": 5 },
+    "22": { "title": "Your Builder Day", "summary": "Turn vision into a plan.", "guidance": "[stub] Personal Day 22 supports big, grounded moves.", "focus": "Manifest", "do": ["Take one concrete step on the big goal"], "avoid": ["Overwhelm"], "rating": 5 },
+    "33": { "title": "Your Service Day", "summary": "Lead by lifting others.", "guidance": "[stub] Personal Day 33 favors compassionate impact.", "focus": "Uplift", "do": ["Mentor or help"], "avoid": ["Self-neglect"], "rating": 5 }
+  },
+
+  "lifePathOverlay": {
+    "7": {
+      "1": { "guidance": "[stub overlay] As a Life Path 7 on a Personal Day 1, begin quietly and on your own terms - a private start beats a public one.", "do": ["Start solo", "Research before you leap"] },
+      "8": { "guidance": "[stub overlay] LP7 on a Personal Day 8: let your analysis, not hustle, drive the power move." }
+    },
+    "9": {
+      "1": { "guidance": "[stub overlay] LP9 on a Personal Day 1: begin something that also gives back - your fresh start lands best with a cause behind it." }
+    }
+  }
+}

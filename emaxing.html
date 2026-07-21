@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0d0b1a">
+<title>EMaxing — Energy Maxing</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ema-shell">
+
+  <header class="ema-header">
+    <div class="ema-logo">E<span>Maxing</span></div>
+    <div class="ema-tag">Your daily energy edge</div>
+  </header>
+
+  <section id="emaSetup" class="ema-card ema-setup">
+    <h1 class="ema-setup-title">When's your birthday?</h1>
+    <p class="ema-setup-sub">Get your core numbers and today's energy reading — free.</p>
+    <form id="emaBdayForm" class="ema-bday-form">
+      <input type="date" id="emaBdayInput" required>
+      <button class="ema-btn" type="submit">See my energy →</button>
+    </form>
+  </section>
+
+  <main id="emaMain" style="display:none;">
+    <section class="ema-card">
+      <div class="ema-card-eyebrow">Your Numbers</div>
+      <div id="emaProfile"></div>
+      <a href="#" class="ema-link" id="emaChangeBday">Change birthday</a>
+    </section>
+
+    <section class="ema-card" id="emaFreeDaily"></section>
+
+    <section class="ema-card ema-personal-card" id="emaPersonal"></section>
+
+    <nav class="ema-foot">
+      <a class="ema-foot-link" href="calendar.html">📅 Open the daily calendar</a>
+    </nav>
+  </main>
+
+  <footer class="ema-legal">EMaxing · daily numerology energy · for entertainment &amp; self-reflection</footer>
+</div>
+
+<script src="lib/astronomy.browser.min.js"></script>
+<script src="lib/astro-engine.js"></script>
+<script src="lib/numerology.js"></script>
+<script src="lib/compat-data.js"></script>
+<script src="lib/compat-engine.js"></script>
+<script src="emaxing-engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
