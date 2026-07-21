@@ -17,13 +17,14 @@ const EMA_DAYTYPE = { synergy: 'cheat', flow: 'flow', trap: 'trap', bestOfBoth: 
 const EMA_DAYTYPE_LABEL = { cheat: 'Cheat Code', flow: 'Flow', trap: 'Matrix Trap', farm: 'Hardest to Farm' };
 function emaDaytype(classKey) { return EMA_DAYTYPE[classKey] || 'flow'; }
 
-// Paid synthesis classKeys map onto the same four banner colors (reuses the
-// day-type banner CSS). allFriction has no dedicated signal color yet — it rides
-// the trap red as a "heavy day, tread carefully" cue until a 5th state exists.
+// Paid synthesis classKeys map onto the banner colors (reuses the day-type
+// banner CSS). allFriction is deliberately NOT its own branded signal (Manuel's
+// call): it renders with the neutral Flow treatment even though its copy names a
+// genuinely heavy day — the reading carries the weight, the banner stays quiet.
 const EMA_PAID_DAYTYPE = {
   allFavorable: 'cheat',
   dayYearTrap: 'trap', monthYearTrap: 'trap', dayMonthTrap: 'trap',
-  allFriction: 'trap',
+  allFriction: 'flow',
   flow: 'flow',
 };
 function emaPaidDaytype(classKey) { return EMA_PAID_DAYTYPE[classKey] || 'flow'; }
