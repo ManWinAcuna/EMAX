@@ -65,10 +65,12 @@ function emaRenderProfile(birthDate) {
 
 function emaRenderFreeDaily() {
   const today = new Date(); today.setHours(0, 0, 0, 0);
-  const daily = emaxingUniversalDaily(today, emaxingContent);
+  const daily = emaxingTwoNumberDaily(today, emaxingContent);
   const dateLabel = today.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
-  document.getElementById('emaFreeDaily').innerHTML =
-    `<div class="ema-card-eyebrow">Energy Maxing for the Day · ${emaEsc(dateLabel)}</div>${emaAdviceHtml(daily.entry)}`;
+  document.getElementById('emaFreeDaily').innerHTML = `
+    <div class="ema-card-eyebrow">Energy Maxing for the Day · ${emaEsc(dateLabel)}</div>
+    <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayOfMonth)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
+    ${emaAdviceHtml(daily.entry)}`;
 }
 
 function emaRenderPersonal(birthDate) {

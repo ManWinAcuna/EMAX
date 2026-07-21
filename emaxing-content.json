@@ -1,5 +1,23 @@
 {
-  "_note": "STUB CONTENT for wiring/demo only. Marketing session authors the real copy. Schema: universalDay + personalDay keyed by number ('1'-'9','11','22','33'); lifePathOverlay[lifePath][personalDay] is an optional partial that merges over personalDay (overlay fields win, base is always the fallback). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], rating}.",
+  "_note": "STUB CONTENT for wiring/demo only. Marketing session authors real copy. AdviceEntry = {title, summary, guidance, focus, do[], avoid[], rating}. FREE daily = the two-number model in 'freeDaily' below (universalDay single-number block is SUPERSEDED, kept for reference only). PAID daily = personalDay keyed by number ('1'-'9','11','22','33'), with lifePathOverlay[lifePath][personalDay] an optional partial merged over it (overlay fields win, base is the fallback).",
+
+  "freeDaily": {
+    "_note": "Two-number model: dayOfMonth (pure 1-9) x universalDay (1-9, 11, 22, 33). Engine scores the pair with numerologyCompat, then classifies: score>=thresholds.synergyMin -> 'synergy'; >=flowMin -> 'flow'; else LOW, which splits editorially via lowSplit[pairKey] into 'trap' (default) or 'bestOfBoth'. Wording = classTemplates[class], optionally overridden by heroPairs[pairKey]. pairKey = '<dayOfMonth>x<universalDay>' e.g. '1x9', '3x11'. A single compat score CANNOT tell trap from bestOfBoth (both can be low), so lowSplit is where you encode Manuel's rule per pair.",
+    "thresholds": { "synergyMin": 75, "flowMin": 45 },
+    "classTemplates": {
+      "synergy": { "title": "In Sync", "summary": "[stub] The day's two currents pull the same way.", "guidance": "[stub] Day energy {dayOfMonth} and Universal {universalDay} reinforce each other - ride it.", "focus": "Flow with it", "do": ["Lean in"], "avoid": ["Overthinking"], "rating": 5 },
+      "flow": { "title": "Workable", "summary": "[stub] Different currents, no real friction.", "guidance": "[stub] Day {dayOfMonth} and Universal {universalDay} coexist fine - steady day.", "focus": "Steady", "do": ["Keep moving"], "avoid": ["Forcing drama"], "rating": 3 },
+      "trap": { "title": "Matrix Trap", "summary": "[stub] The two numbers pull against each other on the SAME move.", "guidance": "[stub] Day {dayOfMonth} says one thing, Universal {universalDay} the opposite - the obvious impulse quietly misfires today. Don't force it.", "focus": "Resist the itch", "do": ["Wait a day on the big move"], "avoid": ["Acting on the obvious impulse"], "rating": 1 },
+      "bestOfBoth": { "title": "Best of Both", "summary": "[stub] Two different lanes you can actually merge.", "guidance": "[stub] Day {dayOfMonth} and Universal {universalDay} live in different lanes - don't blend them, DO both deliberately.", "focus": "Do both, on purpose", "do": ["Use each energy in its own lane"], "avoid": ["Trying to blend them into one"], "rating": 4 }
+    },
+    "lowSplit": {
+      "4x3": "bestOfBoth",
+      "1x9": "trap"
+    },
+    "heroPairs": {
+      "1x9": { "title": "The Quiet Misfire", "guidance": "[stub hero] Day 1 begs you to start; Universal 9 is a closing energy. Starting today feels right and quietly fizzles - finish something instead." }
+    }
+  },
 
   "universalDay": {
     "1": { "title": "Fresh Start", "summary": "A day the collective clock resets to one.", "guidance": "[stub] Universal 1 favors initiating over finishing. Plant, don't harvest.", "focus": "Initiate", "do": ["Start the thing", "Lead"], "avoid": ["Waiting for permission"], "rating": 4 },

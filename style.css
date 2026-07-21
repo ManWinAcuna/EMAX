@@ -86,6 +86,10 @@ body {
 .ema-num-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 6px; }
 .ema-link { display: inline-block; margin-top: 14px; color: var(--muted); font-size: 0.85rem; text-decoration: none; border-bottom: 1px dotted var(--muted); }
 
+/* Two-number day line */
+.ema-daynums { font-size: 0.9rem; color: var(--muted); margin: -4px 0 12px; }
+.ema-daynums b { color: var(--accent2); }
+
 /* Advice */
 .ema-advice-title { font-size: 1.2rem; font-weight: 750; margin-bottom: 4px; }
 .ema-focus { font-size: 0.9rem; color: var(--muted); margin-bottom: 10px; }
