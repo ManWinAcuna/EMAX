@@ -46,6 +46,7 @@ function emaRenderPersonal(birthDate) {
 
   if (!emaxingIsSubscriber()) {
     el.classList.add('locked');
+    el.removeAttribute('data-daytype'); // no banner tint on the locked teaser
     const teaser = {
       title: 'Your Personal Guidance',
       focus: '••••',
@@ -69,10 +70,11 @@ function emaRenderPersonal(birthDate) {
 
   el.classList.remove('locked');
   const r = emaxingPersonalDaily(birthDate, today, emaxingContent);
+  el.setAttribute('data-daytype', emaPaidDaytype(r.classKey)); // day-type banner hook
+  // No numbers/scores shown — "hidden soup" rule: the reading is the whole product.
   el.innerHTML = `
     <div class="ema-card-eyebrow">Your Personal Guidance · Today</div>
-    ${emaAdviceHtml(r.entry)}
-    <div class="ema-personal-meta">Personal Day ${emaEsc(r.personalDay)} · Month ${emaEsc(r.personalMonth)} · Year ${emaEsc(r.personalYear)}</div>`;
+    ${emaAdviceHtml(r.entry)}`;
 }
 
 function emaShowApp(iso) {

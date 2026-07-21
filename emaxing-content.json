@@ -1,5 +1,5 @@
 {
-  "_note": "FREE-TIER content authored by marketing session (Manuel's voice). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. 'trap' is a NEW field per Manuel: every reading surfaces a matrix trap, even good days — surface it prominently as the daily hook ('today's trap'). FREE daily = two-number model in 'freeDaily'. universalDay = SUPERSEDED single-number stub (reference only). PAID (personalDay + lifePathOverlay) still STUBS — next phase.",
+  "_note": "AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. 'trap' is surfaced prominently as the daily hook ('today's trap'). LIVE MODELS: free tier = two-number model in 'freeDaily' (authored, Manuel's voice); paid tier = clash-based multi-timeframe synthesis in 'personalDaily' (mechanism locked, copy is [stub] awaiting Manuel's voice). SUPERSEDED reference-only sections: 'universalDay' (old single-number free), 'personalDay' + 'lifePathOverlay' (old number-keyed paid).",
 
   "numbers": {
     "_note": "Per-number energy blocks. A = day-of-month number's block, B = universal-day number's block. Class templates weave these via {A.energy}/{A.move}/{A.trap}/{B.energy}/{B.move}/{B.trap}. Keys 1-9, 11, 22, 33, 13 are real. 28 folds to 1 (Manuel: reduce 28 -> 1 in the reducer; this entry is a fallback).",
@@ -95,13 +95,89 @@
     }
   },
 
+  "personalDaily": {
+    "_note": "PAID tier — LIVE model (Marketing-locked multi-timeframe synthesis). emaxingPersonalDaily reads computeEnergyFlow's per-level numerology scores (yearScore/monthScore/dayScore), bands each into direction (FAVORABLE >= favMin, FRICTION < frictionMin, else NEUTRAL), then classifies the BETWEEN-level relationship: all three FAVORABLE -> 'allFavorable' (biggest cheat); a bigger<->smaller opposite-ends clash (one FAV + one FRI) -> a scaled trap, precedence 'dayYearTrap' > 'monthYearTrap' > 'dayMonthTrap' (bigger cycle wins the read); all three FRICTION -> 'allFriction' (heavy/rest); else 'flow'. Identity applied last: identityFlavor[lifePathKey][classKey] PARTIALLY overrides the base classTemplate (merge like the free tier). NEVER show numbers/scores (hidden soup) — QUALITATIVE tokens ONLY: {leadName} (cycle that wins: 'your year'|'this month'|'today'|'everything'), {trapName} (cycle to resist), {yearBand}/{monthBand}/{dayBand} ('favorable'|'neutral'|'friction'). AdviceEntry = {title, summary, guidance, focus, do[], avoid[], trap, rating}. All copy below is [stub] — replace in Manuel's voice.",
+    "thresholds": { "favMin": 75, "frictionMin": 45 },
+    "classTemplates": {
+      "allFavorable": {
+        "title": "🟢 Everything's Stacked",
+        "summary": "[stub] Year, month, and today all pulling the same way — the rare one.",
+        "guidance": "[stub] Your year, this month, and today are all favorable at once. This almost never lines up. Make the biggest move you've been sitting on — the whole board is behind you.",
+        "focus": "Go all-in",
+        "do": ["Make the big move while every level agrees", "Stack it — don't sit on a rare one"],
+        "avoid": ["Playing small on a day the whole board is with you"],
+        "trap": "[stub] Assuming a stacked day does the work for you — it opens the door, you still walk through.",
+        "rating": 5
+      },
+      "dayYearTrap": {
+        "title": "🔴 Don't Let Today Wreck Your Year",
+        "summary": "[stub] Today pulls one way, your year's arc the other — the biggest trap on the board.",
+        "guidance": "[stub] {leadName} is running {yearBand} while {trapName} is {dayBand}, and they're fighting. This is the widest clash there is: a single day's impulse against your whole year's direction. Play the year. Let today's pull go by.",
+        "focus": "Protect the year",
+        "do": ["Move with {leadName}, not the impulse of {trapName}"],
+        "avoid": ["Blowing up a good year over how {trapName} feels"],
+        "trap": "[stub] Letting one day's feeling override twelve months of direction.",
+        "rating": 2
+      },
+      "monthYearTrap": {
+        "title": "🔴 The Month vs the Year",
+        "summary": "[stub] This month and your year's arc are pulling apart.",
+        "guidance": "[stub] {leadName} is {yearBand} but {trapName} is {monthBand}. The chapter you're in this month is fighting the bigger story. Bias to the year — treat this month as a phase to manage, not the whole truth.",
+        "focus": "Zoom out",
+        "do": ["Keep steering by {leadName}"],
+        "avoid": ["Rewriting the year around one hard month"],
+        "trap": "[stub] Mistaking a rough chapter for the whole book.",
+        "rating": 2
+      },
+      "dayMonthTrap": {
+        "title": "🟠 Today vs This Month",
+        "summary": "[stub] Today's pull cuts against this month's groove.",
+        "guidance": "[stub] {trapName} is {dayBand} while {leadName} is {monthBand} — a smaller, weekly-scale clash. Don't let one off-key day knock you out of the month's rhythm. Follow the month.",
+        "focus": "Hold the rhythm",
+        "do": ["Stay with {leadName}'s groove"],
+        "avoid": ["Overcorrecting on one restless day"],
+        "trap": "[stub] Ditching a good month's habit over one off day.",
+        "rating": 2
+      },
+      "allFriction": {
+        "title": "🔴 Heavy on Every Level",
+        "summary": "[stub] Year, month, and today all running friction — a low-battery stretch.",
+        "guidance": "[stub] Every level is fighting the current right now. This isn't the day to force outcomes — it's rest-and-consolidate. Do maintenance, protect your energy, wait for the tide to turn.",
+        "focus": "Rest and hold",
+        "do": ["Handle maintenance, not big swings", "Protect your energy"],
+        "avoid": ["Forcing a big move into a headwind"],
+        "trap": "[stub] Pushing hard when every level says conserve — that's how you burn out.",
+        "rating": 2
+      },
+      "flow": {
+        "title": "⚪ Clean Lane",
+        "summary": "[stub] No clash between the levels — just execute.",
+        "guidance": "[stub] Your year, month, and today aren't fighting. No cheat code, no trap — a clean lane. Lead with {leadName} and put in the reps; steady compounds here.",
+        "focus": "Execute",
+        "do": ["Steady reps on what's in front of you"],
+        "avoid": ["Waiting for drama to tell you it matters"],
+        "trap": "[stub] Treating a calm day as a day off.",
+        "rating": 3
+      }
+    },
+    "identityFlavor": {
+      "_note": "Per Life Path key (1-9, 11, 22, 33), per classKey: PARTIAL overrides merged onto the base classTemplate — author only the fields you want to change (e.g. guidance/trap). Absent = base as-is. Same clash plays differently per identity (Manuel: a Day-vs-Year trap hits a 7 as 'retreat further in', a 1 as 'the itch to charge in rash'). [stub] examples:",
+      "1": {
+        "dayYearTrap": { "trap": "[stub] For a 1, the trap is the itch to charge in and start something rash today — sit on it." }
+      },
+      "7": {
+        "dayYearTrap": { "trap": "[stub] For a 7, the trap is retreating even further into your head today — don't disappear on the year." }
+      }
+    }
+  },
+
   "universalDay": {
     "_note": "SUPERSEDED single-number stub — kept for reference only; freeDaily is the live free model.",
     "1": { "title": "Fresh Start", "summary": "A day the collective clock resets to one.", "guidance": "[stub] Universal 1 favors initiating over finishing. Plant, don't harvest.", "focus": "Initiate", "do": ["Start the thing", "Lead"], "avoid": ["Waiting for permission"], "rating": 4 }
   },
 
   "personalDay": {
-    "_note": "PAID tier — STUBS. Next phase after the free tier ships.",
+    "_note": "SUPERSEDED — the old number-keyed paid stub. The live paid model is 'personalDaily' (clash-based synthesis). Kept for reference only; the engine no longer reads this.",
     "1": { "title": "Your Momentum Day", "summary": "Your personal reset - initiate.", "guidance": "[stub] On your Personal Day 1, start what you've been circling.", "focus": "Begin", "do": ["Launch one thing", "Decide"], "avoid": ["Dwelling on the past"], "rating": 4 },
     "2": { "title": "Your Patience Day", "summary": "Ease off the gas; connect.", "guidance": "[stub] Personal Day 2 rewards tact and teamwork.", "focus": "Connect", "do": ["Mend a bridge", "Cooperate"], "avoid": ["Forcing outcomes"], "rating": 3 },
     "3": { "title": "Your Expression Day", "summary": "Create and be social.", "guidance": "[stub] Personal Day 3 lifts your voice and charm.", "focus": "Express", "do": ["Post/create", "Reach out"], "avoid": ["Overcommitting"], "rating": 4 },
@@ -117,7 +193,7 @@
   },
 
   "lifePathOverlay": {
-    "_note": "PAID tier — STUBS. Next phase.",
+    "_note": "SUPERSEDED — old number-keyed overlay. Identity now lives in personalDaily.identityFlavor (keyed by classKey, not personal-day number). Kept for reference only; not read by the engine.",
     "7": {
       "1": { "guidance": "[stub overlay] As a Life Path 7 on a Personal Day 1, begin quietly and on your own terms - a private start beats a public one.", "do": ["Start solo", "Research before you leap"] },
       "8": { "guidance": "[stub overlay] LP7 on a Personal Day 8: let your analysis, not hustle, drive the power move." }

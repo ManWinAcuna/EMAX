@@ -132,24 +132,83 @@ function emaxingMergeAdvice(base, overlay) {
   return Object.assign({}, base, overlay);
 }
 
-// PAID personalized daily - the deterministic core. Personal Day (birthday +
-// date) selects the base reading; the person's Life Path selects an optional
-// overlay merged on top. Returns the merged reading plus the numbers behind it.
+// Direction band for one cycle level's compat-to-universal score: is the person
+// FLOWING with the universal current at this timescale (FAV), FIGHTING it (FRI),
+// or neither (NEU)? Reuses the free tier's own thresholds so the paid verdict
+// can never contradict the free one on the same date.
+function emaxingCycleBand(score, favMin, frictionMin) {
+  if (score >= favMin) return 'FAV';
+  if (score < frictionMin) return 'FRI';
+  return 'NEU';
+}
+
+// PAID personalized daily — the multi-timeframe synthesis (Marketing-locked
+// model, from Manuel's "year plays out over the year, month over the month, day
+// every day" framing). computeEnergyFlow already scores each nested cycle level
+// against its universal context; this bands each level's direction and reads the
+// relationship BETWEEN levels. A "clash" = a bigger and a smaller cycle at
+// opposite ends (one FAV, one FRI) — and the bigger cycle always wins the read
+// ("don't let today wreck your year"). Severity scales with the span of the
+// clash: Day↔Year (biggest) > Month↔Year > Day↔Month. All three FAV = the rare
+// stacked Cheat Code; all three FRI = a heavy/rest day. Identity (Life Path)
+// flavors it last. Never exposes the numbers/scores — qualitative tokens only.
 function emaxingPersonalDaily(birthDate, targetDate, content) {
   const flow = computeEnergyFlow(birthDate, targetDate);
-  const dayKey = emaxingAdviceKey(flow.numerology.personalDay);
-  const lpKey = emaxingAdviceKey(compatLifePathInfo(birthDate).lookupValue);
+  const cfg = (content && content.personalDaily) || {};
+  const favMin = (cfg.thresholds && cfg.thresholds.favMin != null) ? cfg.thresholds.favMin : 75;
+  const frictionMin = (cfg.thresholds && cfg.thresholds.frictionMin != null) ? cfg.thresholds.frictionMin : 45;
 
-  const base = (content && content.personalDay && content.personalDay[dayKey]) || null;
-  const overlay = (content && content.lifePathOverlay && content.lifePathOverlay[lpKey] && content.lifePathOverlay[lpKey][dayKey]) || null;
+  const bands = {
+    year: emaxingCycleBand(flow.numerology.yearScore, favMin, frictionMin),
+    month: emaxingCycleBand(flow.numerology.monthScore, favMin, frictionMin),
+    day: emaxingCycleBand(flow.numerology.dayScore, favMin, frictionMin),
+  };
+  // Opposite-ends only: a middle NEU never clashes (kills false 51-vs-49 splits).
+  const clash = (a, b) =>
+    (bands[a] === 'FAV' && bands[b] === 'FRI') || (bands[a] === 'FRI' && bands[b] === 'FAV');
+
+  let classKey, lead, trap;
+  if (bands.year === 'FAV' && bands.month === 'FAV' && bands.day === 'FAV') {
+    classKey = 'allFavorable'; lead = 'all'; trap = null;
+  } else if (bands.year === 'FRI' && bands.month === 'FRI' && bands.day === 'FRI') {
+    classKey = 'allFriction'; lead = 'all'; trap = null;
+  } else if (clash('day', 'year')) {
+    classKey = 'dayYearTrap'; lead = 'year'; trap = 'day';
+  } else if (clash('month', 'year')) {
+    classKey = 'monthYearTrap'; lead = 'year'; trap = 'month';
+  } else if (clash('day', 'month')) {
+    classKey = 'dayMonthTrap'; lead = 'month'; trap = 'day';
+  } else {
+    classKey = 'flow'; lead = 'day'; trap = null;
+  }
+
+  const lpKey = emaxingAdviceKey(compatLifePathInfo(birthDate).lookupValue);
+  const templates = cfg.classTemplates || {};
+  const base = templates[classKey] || null;
+  const overlay = (cfg.identityFlavor && cfg.identityFlavor[lpKey] && cfg.identityFlavor[lpKey][classKey]) || null;
+
+  // Qualitative tokens ONLY — the "hidden soup" rule forbids showing the numbers.
+  const LEVEL_NAME = { year: 'your year', month: 'this month', day: 'today', all: 'everything' };
+  const BAND_WORD = { FAV: 'favorable', NEU: 'neutral', FRI: 'friction' };
+  const tokenMap = {
+    leadName: LEVEL_NAME[lead],
+    trapName: trap ? LEVEL_NAME[trap] : '',
+    yearBand: BAND_WORD[bands.year],
+    monthBand: BAND_WORD[bands.month],
+    dayBand: BAND_WORD[bands.day],
+  };
 
   return {
-    entry: emaxingMergeAdvice(base, overlay),
+    entry: emaxingInterpolate(emaxingMergeAdvice(base, overlay), tokenMap),
+    classKey,
+    lead,
+    trap,
+    bands,
     hasOverlay: !!overlay,
+    lifePathKey: lpKey,
+    // Kept for internal use / back-compat only; NEVER rendered (hidden-soup rule).
     personalDay: flow.numerology.personalDay,
     personalMonth: flow.numerology.personalMonth,
     personalYear: flow.numerology.personalYear,
-    dayKey,
-    lifePathKey: lpKey,
   };
 }
