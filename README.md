@@ -15,16 +15,16 @@ hand-edited here; re-copy them if the cockpit's engine changes.
   optional overlay on top. Gated behind subscription.
 
 ## Structure
-- `emaxing.html` / `app.js` / `style.css` — the consumer UI.
+- `index.html` / `app.js` / `style.css` — the consumer UI (profile + daily).
 - `emaxing-engine.js` — the deterministic engine (profile + daily readings).
   Contains no advice copy; all wording is data.
 - `emaxing-content.json` — the advice content (schema in the file's `_note`).
-  Currently STUB copy; the marketing session authors the real content.
+  Free + paid tiers both authored (Manuel's voice, via the marketing session).
 - `lib/` — ported math (astronomy.browser.min.js, astro-engine.js,
   numerology.js, compat-data.js, compat-engine.js).
 
 ## Preview
-Serve the folder statically (any static server) and open `emaxing.html`.
+Serve the folder statically (any static server) and open `index.html`.
 `?unlock=1` temporarily previews the paid tier (a demo flag; replaced by the
 real Firebase subscription check later). `?unlock=0` clears it.
 
