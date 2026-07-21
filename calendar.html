@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0b1a">
+<title>EMaxing — Energy Calendar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="ema-shell">
+
+  <header class="ema-header">
+    <div class="ema-logo">E<span>Maxing</span></div>
+    <div class="ema-tag">Energy calendar</div>
+  </header>
+
+  <section class="ema-card">
+    <div class="ema-cal-nav">
+      <button class="ema-cal-arrow" id="emaCalPrev" type="button" aria-label="Previous month">&lsaquo;</button>
+      <div class="ema-cal-label" id="emaCalLabel"></div>
+      <button class="ema-cal-arrow" id="emaCalNext" type="button" aria-label="Next month">&rsaquo;</button>
+    </div>
+    <div class="ema-cal-dow">
+      <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+    </div>
+    <div class="ema-cal-grid" id="emaCalGrid"></div>
+    <button class="ema-link" id="emaCalToday" type="button">Jump to today</button>
+  </section>
+
+  <section class="ema-card" id="emaCalDetail"></section>
+
+  <nav class="ema-foot"><a class="ema-foot-link" href="emaxing.html">&larr; Back to your profile</a></nav>
+  <footer class="ema-legal">EMaxing · daily numerology energy · for entertainment &amp; self-reflection</footer>
+</div>
+
+<script src="lib/astronomy.browser.min.js"></script>
+<script src="lib/astro-engine.js"></script>
+<script src="lib/numerology.js"></script>
+<script src="lib/compat-data.js"></script>
+<script src="lib/compat-engine.js"></script>
+<script src="emaxing-engine.js"></script>
+<script src="emaxing-ui.js"></script>
+<script src="calendar-app.js"></script>
+</body>
+</html>

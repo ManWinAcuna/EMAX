@@ -50,12 +50,14 @@ function emaxingUniversalDaily(targetDate, content) {
   return { key, dayDisplay: info.display, entry };
 }
 
-// Fills {dayOfMonth}/{universalDay}/{universalDisplay} tokens in an advice
-// entry's text, so a class template can name the numbers without a per-pair
-// rewrite. Unknown tokens are left as-is.
+// Fills tokens in an advice entry's text: raw ({dayOfMonth}/{universalDay}) and
+// block-field ({A.energy}/{A.move}/{A.trap}/{B.energy}/...) where A = the
+// day-of-month number's block and B = the universal-day number's block, pulled
+// from content.numbers. This is what lets a class template weave in each
+// number's ENERGY, not just the digit. Unknown tokens are left as-is.
 function emaxingInterpolate(entry, map) {
   if (!entry) return entry;
-  const sub = (s) => (typeof s === 'string' ? s.replace(/\{(\w+)\}/g, (m, k) => (map[k] != null ? map[k] : m)) : s);
+  const sub = (s) => (typeof s === 'string' ? s.replace(/\{([\w.]+)\}/g, (m, k) => (map[k] != null ? map[k] : m)) : s);
   const out = {};
   Object.keys(entry).forEach((k) => {
     const v = entry[k];
@@ -90,6 +92,19 @@ function emaxingTwoNumberDaily(targetDate, content) {
   const template = (cfg.classTemplates && cfg.classTemplates[classKey]) || null;
   const hero = (cfg.heroPairs && cfg.heroPairs[pairKey]) || null;
 
+  // A = the day-of-month number's block, B = the universal-day number's block,
+  // from content.numbers. Lets templates weave each number's energy/move/trap.
+  const numbers = (content && content.numbers) || {};
+  const A = numbers[String(dayOfMonth)] || {};
+  const B = numbers[String(universalDay)] || {};
+  const tokenMap = {
+    dayOfMonth: dayOfMonth,
+    universalDay: universalDay,
+    universalDisplay: universalInfo.display,
+    'A.energy': A.energy, 'A.move': A.move, 'A.trap': A.trap,
+    'B.energy': B.energy, 'B.move': B.move, 'B.trap': B.trap,
+  };
+
   return {
     dayOfMonth,
     universalDay,
@@ -97,11 +112,9 @@ function emaxingTwoNumberDaily(targetDate, content) {
     score,
     pairKey,
     classKey,
-    entry: emaxingInterpolate(emaxingMergeAdvice(template, hero), {
-      dayOfMonth: dayOfMonth,
-      universalDay: universalDay,
-      universalDisplay: universalInfo.display,
-    }),
+    numbersA: A,
+    numbersB: B,
+    entry: emaxingInterpolate(emaxingMergeAdvice(template, hero), tokenMap),
   };
 }
 
