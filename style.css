@@ -15,15 +15,15 @@
   --primary: #fb8332;
   --primary-ink: #2a1206;
   /* Day-type signal colors (UI Dev Spec Sheet 2 — dark defaults).
-     Near-final; swap to Manuel's exact brand hex when his assets land. */
+     FINAL palette — there are no separate brand assets; these hexes are the brand. */
   --state-cheat: #34d399;
   --state-flow: #94a3b8;
   --state-trap: #f7889b;
   --state-farm: #f5c451;
 }
 
-/* Light theme — dormant until a data-theme="light" toggle is wired (UI Dev Spec
-   Sheet 2). Dark stays the default live look. */
+/* Light theme — intentionally dormant. EMAX is dark-only by design (no toggle
+   shipped or planned); this block is kept as a harmless, unused reference. */
 :root[data-theme="light"] {
   --bg: #f7f5fb;
   --bg2: #ffffff;
