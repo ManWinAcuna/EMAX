@@ -14,12 +14,12 @@ window.EMAXING_CONFIG_READY = false;
 
 // Firebase — a NEW project for EMAX (do NOT reuse the cockpit's project).
 window.EMAXING_FIREBASE_CONFIG = {
-  apiKey: 'REPLACE_ME',
-  authDomain: 'REPLACE_ME.firebaseapp.com',
-  projectId: 'REPLACE_ME',
-  storageBucket: 'REPLACE_ME.firebasestorage.app',
-  messagingSenderId: 'REPLACE_ME',
-  appId: 'REPLACE_ME',
+  apiKey: 'AIzaSyBom1TENwQZk98Hs6Kd9u9BGCxFz7vCRVY',
+  authDomain: 'emax-2b31e.firebaseapp.com',
+  projectId: 'emax-2b31e',
+  storageBucket: 'emax-2b31e.firebasestorage.app',
+  messagingSenderId: '960822271097',
+  appId: '1:960822271097:web:0bbc411f61173f5a2408a8',
 };
 
 // Stripe — publishable key (test key while in test mode) + the $4.90/mo price id.

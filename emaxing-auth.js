@@ -17,6 +17,12 @@
 
 const EMAXING_DEMO_UNLOCK_KEY = 'emaxing_demo_unlock';
 
+// Owner comp: these emails always get the paid tier, no payment needed (mirrors
+// the cockpit's owner gate). Only takes effect once auth is live and the user is
+// signed in as one of them — until then, the ?unlock=1 demo flag covers testing.
+// Note: emails ship in the client source; keep it to accounts you own.
+const EMAXING_OWNER_EMAILS = ['horseyear2026manuel@gmail.com'];
+
 let emaxingFbLoadPromise = null;
 let emaxingCurrentUser = null;
 let emaxingSubActive = false;      // last-known Firestore subscription.active
@@ -32,9 +38,17 @@ function emaxingConfigReady() {
   return !!window.EMAXING_CONFIG_READY;
 }
 
-// The real subscriber check (sync, best-effort). Demo unlock flag still previews
-// the tier for dev/marketing without a backend.
+// True when the signed-in user is a comped owner. Case-insensitive; only ever
+// true once Firebase auth is live and this account is signed in.
+function emaxingIsOwner() {
+  const email = emaxingCurrentUser && emaxingCurrentUser.email;
+  return !!email && EMAXING_OWNER_EMAILS.indexOf(String(email).trim().toLowerCase()) !== -1;
+}
+
+// The real subscriber check (sync, best-effort). Owner comp + the demo unlock
+// flag both preview the tier without a paid subscription/backend.
 function emaxingIsSubscriber() {
+  if (emaxingIsOwner()) return true;
   try {
     const p = new URLSearchParams(location.search);
     if (p.get('unlock') === '1') localStorage.setItem(EMAXING_DEMO_UNLOCK_KEY, '1');
