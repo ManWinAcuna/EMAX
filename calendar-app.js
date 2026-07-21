@@ -43,7 +43,7 @@ function emaRenderCalDetail() {
   const label = emaSelected.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
   el.innerHTML = `
     <div class="ema-card-eyebrow">${emaEsc(label)}</div>
-    <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayOfMonth)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
+    <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayCompound)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
     ${emaAdviceHtml(daily.entry)}`;
 }
 

@@ -15,7 +15,7 @@
     "11": { "energy": "magnetism and raw intuition", "move": "trust your gut and burn the intensity into a physical outlet", "trap": "the live wire torches you and everyone near you if you don't burn it clean" },
     "22": { "energy": "big vision made real", "move": "build the thing that outlasts you", "trap": "building everyone else's dream and ending up empty-handed" },
     "33": { "energy": "influence and teaching", "move": "share what you know and lift the room", "trap": "getting so far ahead you start looking down on people" },
-    "13": { "energy": "the power of creation — 1 sparks it, 3 shapes it, then it grounds into a 4", "move": "make it REAL: start it, get creative, then ground it and pound the work", "trap": "falling in love with the idea and skipping the grind — no work, no creation" },
+    "13": { "energy": "building something that's actually yours", "move": "start it, make it your own, then put in the work to make it real", "trap": "falling for the idea and skipping the grind — no work, no creation" },
     "28": { "energy": "starting and first moves (28 reduces to 1)", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" }
   },
 
@@ -26,41 +26,41 @@
       "synergy": {
         "title": "🟢 Cheat Code Day",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — the code's cracked.",
-        "guidance": "Two currents, one direction today — the date's running {A.energy}, the day itself {B.energy}. When they line up like this the matrix leaves a door open, so what usually takes force just flows. Energy max by going all in while the glitch is live: {A.move}, and stack the wins while you can.",
+        "guidance": "Today's a {dayOfMonth} and the day underneath it is a {universalDay}, and for once they're both pulling the same direction. That's rare. When two energies line up like this there's nothing to fight through, so whatever you go for just moves.\n\nThis is the day to make the move you've been sitting on. {A.move} while the road's clear.\n\nDon't overthink it and don't waste it. A day where everything's already going your way doesn't come around often.",
         "focus": "Ride the glitch",
         "do": ["Go all-in while it's easy", "Stack wins — don't sit on it"],
         "avoid": ["Coasting and wasting a rare one"],
-        "trap": "Thinking the cheat code does the work for you. It opens the door — you still gotta walk through.",
+        "trap": "Thinking the cheat code does the work for you. It opens the door. You still gotta walk through it.",
         "rating": 5
       },
       "flow": {
         "title": "⚪ Flow Day",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — clean lane, no drama.",
-        "guidance": "No clash today, no cheat code — just a clean lane. The date's running {A.energy}, the day {B.energy}, and the two sit fine side by side. Energy max by leaning into {A.move}, with a little {B.energy} flavor on the side.",
+        "guidance": "Nothing's really clashing today, but nothing's stacked in your favor either. It's just a clean, quiet day.\n\nThe {dayOfMonth} wants {A.energy} and the {universalDay} underneath has a little {B.energy} in it, and the two sit fine next to each other. No big move to make, no trap to dodge.\n\nJust {A.move} and keep it steady. These are the days that don't feel like much, but they quietly add up if you don't sleep on them.",
         "focus": "Just execute",
         "do": ["Steady reps — handle what's in front of you"],
         "avoid": ["Sleepwalking because nothing's dramatic"],
-        "trap": "Treating a quiet day as a day off. Steady doesn't mean checked out.",
+        "trap": "Treating a quiet day like a day off. Steady doesn't mean checked out.",
         "rating": 3
       },
       "trap": {
         "title": "🔴 Matrix Trap Day",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — read the fine print.",
-        "guidance": "The date's a {dayOfMonth}, so you'll FEEL the pull to {A.move}. But the universal current's a {universalDay} — it wants the opposite. That itch is the trap; everyone falls for it subconsciously and wonders why nothing lands. Energy max by ignoring the impulse and playing the {universalDay} instead: {B.move}.",
+        "guidance": "Today's a {dayOfMonth}, so you're gonna feel that pull to {A.move}. That's just the {dayOfMonth} in you, and it feels completely right.\n\nBut here's the twist. The day underneath is a {universalDay}, and it wants the opposite. So that itch you're feeling is actually the trap. Everybody falls for it without noticing, then wonders later why nothing landed.\n\nDon't take the bait. Play the {universalDay} instead — {B.move} — and let the other thing wait for a day that'll actually hold it.",
         "focus": "Don't take the bait",
         "do": ["{B.move}", "Sit on the obvious move before you act"],
         "avoid": ["{A.move} on autopilot — that's the bait"],
-        "trap": "{A.trap} — and today the whole day is built to bait you into it.",
+        "trap": "{A.trap}. And today the whole day's built to bait you into it.",
         "rating": 2
       },
       "bestOfBoth": {
         "title": "🟡 Hardest to Farm",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — two worlds at once.",
-        "guidance": "Two different worlds today: the date's a {dayOfMonth} ({A.energy}) and the universal's a {universalDay} ({B.energy}). Neither's wrong — but you gotta serve both at once, which is what makes these the hardest to farm. Energy max by MERGING them: {A.move}, but do it {B.energy}-style.",
+        "guidance": "Today's a {dayOfMonth}, pulling you toward {A.energy}. But there's a {universalDay} sitting right underneath it, and that's more about {B.energy}.\n\nSo the two don't really want the same thing, and that's exactly what makes today one of the hardest to farm. You gotta live in both worlds at once, and you don't get to pick one.\n\nSo you combine them. {A.move}, but do it {B.energy}-style. Pull both off and today pays double. Skip one and you get neither.",
         "focus": "AND, not OR",
         "do": ["Do both at once — merge them", "{A.move} in a {B.energy} way"],
         "avoid": ["Going all-in on one and ghosting the other", "Freezing because you can't pick"],
-        "trap": "Picking the world you feel and ignoring the other — or freezing. The play is AND, not OR.",
+        "trap": "Picking the world you feel and ignoring the other. Or freezing. The play is AND, not OR.",
         "rating": 3
       }
     },
@@ -75,21 +75,21 @@
       "1x9": {
         "title": "🔴 Matrix Trap Day",
         "summary": "Day 1 × Universal 9 — the classic trap.",
-        "guidance": "This day is pure START energy — new project, new chapter, big move. Twist: it's a 9 universal day, and 9 is FINISH energy, not start. So everybody subconsciously feels the itch to launch something life-changing today, and it quietly won't stick. Energy max by closing loops, not opening them — finish what's already on your plate.",
+        "guidance": "Today's a 1, so every part of you is gonna wanna start something — new project, new chapter, big move. That's just what a 1 does, it pushes you forward.\n\nBut here's the twist. The day underneath is a 9, and 9 is the exact opposite — it's built to finish things, not start them. So you get this itch to launch something life-changing today, it feels completely right, but a 9 won't let it stick.\n\nThat's the matrix trap. We fall for it without even noticing, then wonder later why it fell apart.\n\nSo don't start today. Close instead. Finish what's already on your plate and save the new thing for a day that'll actually hold it.",
         "focus": "Close, don't open",
         "do": ["Finish what's already open", "Tie off the old chapter"],
         "avoid": ["Starting something 'life-changing' today"],
-        "trap": "The itch to start. It's the strongest bait on the board — start now and you'll pay double to make it stick.",
+        "trap": "The itch to start. Strongest bait on the board. Start now and you pay double to make it stick.",
         "rating": 2
       },
       "4x3": {
         "title": "🟡 Hardest to Farm",
         "summary": "Day 4 × Universal 3 — routine meets play.",
-        "guidance": "The date's a 4 — routine, discipline, get your work in, hit the gym. But the universal's a 3: creativity, connection, being a kid. Two different worlds, and today you gotta live in both — one of the hardest days to farm. Energy max by getting creative WITH your structure: switch up the workout, find a fresh way to run the routine, and if it's already dialed, actually have fun with it.",
+        "guidance": "Today's a 4, so it's your work day — routine, get the reps in, hit the gym. But there's a 3 sitting right underneath it, and a 3 is all about creativity and connection.\n\nSo the two don't really want the same thing, and that's what makes today one of the hardest to farm. You gotta live in both worlds at once. Part of you wants to be a kid and forget the routine completely, but you still gotta follow it if you want the payoff.\n\nSo you combine them. Get creative with the work — switch up the workout, run your routine a different way. And if you've already got it dialed, just have fun with it for once.",
         "focus": "Creative discipline",
         "do": ["Switch up the routine — keep the routine", "Make the work fun"],
         "avoid": ["Grinding joylessly", "Blowing off the routine to 'be free'"],
-        "trap": "Picking one world — all grind or all play. Today only pays if you do both.",
+        "trap": "Picking one world. All grind or all play. Today only pays if you do both.",
         "rating": 3
       }
     }

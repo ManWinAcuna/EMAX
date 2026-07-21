@@ -36,7 +36,7 @@ function emaRenderFreeDaily() {
   el.setAttribute('data-daytype', emaDaytype(daily.classKey)); // UI hook for the day-type banner
   el.innerHTML = `
     <div class="ema-card-eyebrow">Energy Maxing for the Day · ${emaEsc(dateLabel)}</div>
-    <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayOfMonth)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
+    <div class="ema-daynums">Day energy <b>${emaEsc(daily.dayCompound)}</b> &times; Universal <b>${emaEsc(daily.universalDisplay)}</b></div>
     ${emaAdviceHtml(daily.entry)}`;
 }
 

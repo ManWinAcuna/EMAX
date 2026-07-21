@@ -73,15 +73,27 @@ function emaxingInterpolate(entry, map) {
 // split is DATA, not math: content.freeDaily.lowSplit[pairKey] decides, and
 // classTemplates + optional heroPairs supply the wording. Same for everyone on
 // a given date; powers both the profile's free reading and the calendar.
+// Compound-first content lookup: a compound number (13th, 22nd, 31st) reads from
+// its OWN block in `numbers` if authored, else falls back to its reduced root —
+// so a 13/4, 22/4, 31/4 can each carry a different flavor while still scoring as a
+// 4. The compound is shown as the label; the read never explains it (Manuel's
+// "secret" — just give the energy).
+function emaxingNumberBlock(numbers, compound, root) {
+  return (numbers && (numbers[String(compound)] || numbers[String(root)])) || {};
+}
+
 function emaxingTwoNumberDaily(targetDate, content) {
   const cfg = (content && content.freeDaily) || {};
-  const dayOfMonth = emaxingDigit1to9(targetDate.getDate());
+  const rawDay = targetDate.getDate();             // 1-31, the compound
+  const dayOfMonth = emaxingDigit1to9(rawDay);     // 1-9 root — drives scoring + classification
+  const dayCompound = rawDay > 9 ? (rawDay + '/' + dayOfMonth) : String(rawDay); // label, e.g. "13/4"
   const universalInfo = compatLifePathInfo(targetDate);
   // Universal axis keeps masters 11/22/33 and karmic 13, but folds 28 -> 1
   // (Manuel's rule).
   let universalDay = universalInfo.lookupValue;
   let universalDisplay = universalInfo.display;
   if (universalDay === 28) { universalDay = 1; universalDisplay = '1'; }
+  const universalRoot = emaxingDigit1to9(universalDay);
   const score = numerologyCompat(dayOfMonth, universalDay);
   const pairKey = dayOfMonth + 'x' + universalDay;
 
@@ -99,10 +111,12 @@ function emaxingTwoNumberDaily(targetDate, content) {
   // A = the day-of-month number's block, B = the universal-day number's block,
   // from content.numbers. Lets templates weave each number's energy/move/trap.
   const numbers = (content && content.numbers) || {};
-  const A = numbers[String(dayOfMonth)] || {};
-  const B = numbers[String(universalDay)] || {};
+  // Compound-first: the 13th pulls numbers['13'] if authored, else numbers['4'].
+  const A = emaxingNumberBlock(numbers, rawDay, dayOfMonth);
+  const B = emaxingNumberBlock(numbers, universalDay, universalRoot);
   const tokenMap = {
     dayOfMonth: dayOfMonth,
+    dayCompound: dayCompound,
     universalDay: universalDay,
     universalDisplay: universalDisplay,
     'A.energy': A.energy, 'A.move': A.move, 'A.trap': A.trap,
@@ -111,6 +125,7 @@ function emaxingTwoNumberDaily(targetDate, content) {
 
   return {
     dayOfMonth,
+    dayCompound,
     universalDay,
     universalDisplay: universalDisplay,
     score,
@@ -158,10 +173,18 @@ function emaxingPersonalDaily(birthDate, targetDate, content) {
   const favMin = (cfg.thresholds && cfg.thresholds.favMin != null) ? cfg.thresholds.favMin : 75;
   const frictionMin = (cfg.thresholds && cfg.thresholds.frictionMin != null) ? cfg.thresholds.frictionMin : 45;
 
+  // Each cycle level's direction blends its NUMEROLOGY score with its VIETNAMESE
+  // (Chinese-zodiac) score for the same timescale — Year=year-animal,
+  // Month=month-sign, Day=day-sign. Numerology-led at the engine's own 65/35 ratio
+  // (matches computeEnergyFlow's finalScore), tunable via personalDaily.axisBlend.
+  const wN = (cfg.axisBlend && cfg.axisBlend.numerology != null) ? cfg.axisBlend.numerology : 0.65;
+  const wV = (cfg.axisBlend && cfg.axisBlend.vietnamese != null) ? cfg.axisBlend.vietnamese : 0.35;
+  const num = flow.numerology, viet = flow.vietnamese;
+  const blend = (n, v) => wN * n + wV * v;
   const bands = {
-    year: emaxingCycleBand(flow.numerology.yearScore, favMin, frictionMin),
-    month: emaxingCycleBand(flow.numerology.monthScore, favMin, frictionMin),
-    day: emaxingCycleBand(flow.numerology.dayScore, favMin, frictionMin),
+    year: emaxingCycleBand(blend(num.yearScore, viet.yearScore), favMin, frictionMin),
+    month: emaxingCycleBand(blend(num.monthScore, viet.monthScore), favMin, frictionMin),
+    day: emaxingCycleBand(blend(num.dayScore, viet.daySignScore), favMin, frictionMin),
   };
   // Opposite-ends only: a middle NEU never clashes (kills false 51-vs-49 splits).
   const clash = (a, b) =>
@@ -196,6 +219,11 @@ function emaxingPersonalDaily(birthDate, targetDate, content) {
     yearBand: BAND_WORD[bands.year],
     monthBand: BAND_WORD[bands.month],
     dayBand: BAND_WORD[bands.day],
+    // Astrology flavor — the person's natal signs, optional color for the copy.
+    yearAnimal: viet.personalYearSign,
+    monthSign: viet.personalMonthSign,
+    daySign: viet.personalDaySign,
+    sunSign: getSunSign(birthDate),
   };
 
   return {
