@@ -2,9 +2,9 @@
    All numerology comes from the ported engine; this file is just UI + wiring. */
 
 const EMAXING_BDAY_KEY = 'emaxing_birthday';        // 'YYYY-MM-DD'
-const EMAXING_DEMO_UNLOCK_KEY = 'emaxing_demo_unlock';
 
 let emaxingContent = { universalDay: {}, personalDay: {}, lifePathOverlay: {} };
+let emaCurrentBirthDate = null; // so an auth/subscription change can re-render the paid card
 
 function emaParseISO(iso) {
   const [y, m, d] = iso.split('-').map(Number);
@@ -15,20 +15,7 @@ function emaParseISO(iso) {
 }
 
 // emaEsc / emaStars / emaAdviceHtml live in emaxing-ui.js (shared with calendar).
-
-// TEMPORARY demo gate — replaced later by the real Firebase subscription check.
-// ?unlock=1 flips a local demo flag so the paid tier can be previewed now;
-// ?unlock=0 clears it.
-function emaxingIsSubscriber() {
-  const p = new URLSearchParams(location.search);
-  try {
-    if (p.get('unlock') === '1') localStorage.setItem(EMAXING_DEMO_UNLOCK_KEY, '1');
-    if (p.get('unlock') === '0') localStorage.removeItem(EMAXING_DEMO_UNLOCK_KEY);
-    return localStorage.getItem(EMAXING_DEMO_UNLOCK_KEY) === '1';
-  } catch (e) {
-    return false;
-  }
-}
+// emaxingIsSubscriber / auth modal / checkout live in emaxing-auth.js.
 
 function emaRenderProfile(birthDate) {
   const p = emaxingProfile(birthDate);
@@ -88,6 +75,7 @@ function emaRenderPersonal(birthDate) {
 
 function emaShowApp(iso) {
   const bd = emaParseISO(iso);
+  emaCurrentBirthDate = bd;
   document.getElementById('emaSetup').style.display = 'none';
   document.getElementById('emaMain').style.display = '';
   emaRenderProfile(bd);
@@ -123,11 +111,12 @@ async function emaInit() {
     emaShowSetup();
   });
 
+  // Re-render the paid card whenever auth/subscription state changes (e.g. after
+  // sign-in or a returning subscriber's status loads).
+  window.emaxingOnSubscriptionChange = () => { if (emaCurrentBirthDate) emaRenderPersonal(emaCurrentBirthDate); };
+
   document.body.addEventListener('click', (e) => {
-    if (e.target && e.target.id === 'emaUnlockBtn') {
-      // Stripe checkout gets wired here later.
-      alert('Checkout coming soon — EMaxing Personal is $4.90/mo.');
-    }
+    if (e.target && e.target.id === 'emaUnlockBtn') emaxingHandleUnlock();
   });
 
   let saved = null;

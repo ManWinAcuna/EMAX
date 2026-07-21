@@ -26,7 +26,7 @@
       "synergy": {
         "title": "🟢 Cheat Code Day",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — the code's cracked.",
-        "guidance": "{A.energy} and {B.energy} are pulling the exact same way today — the matrix left a door open. What usually takes force just flows. Energy max by going all in while the glitch is live: {A.move}, and stack the wins while you can.",
+        "guidance": "Two currents, one direction today — the date's running {A.energy}, the day itself {B.energy}. When they line up like this the matrix leaves a door open, so what usually takes force just flows. Energy max by going all in while the glitch is live: {A.move}, and stack the wins while you can.",
         "focus": "Ride the glitch",
         "do": ["Go all-in while it's easy", "Stack wins — don't sit on it"],
         "avoid": ["Coasting and wasting a rare one"],
@@ -36,7 +36,7 @@
       "flow": {
         "title": "⚪ Flow Day",
         "summary": "Day {dayOfMonth} × Universal {universalDay} — clean lane, no drama.",
-        "guidance": "{A.energy} and {B.energy} sit fine together today — no clash, no cheat code, just a clean lane to execute in. Energy max by leaning into {A.move} with a little {B.energy} on the side.",
+        "guidance": "No clash today, no cheat code — just a clean lane. The date's running {A.energy}, the day {B.energy}, and the two sit fine side by side. Energy max by leaning into {A.move}, with a little {B.energy} flavor on the side.",
         "focus": "Just execute",
         "do": ["Steady reps — handle what's in front of you"],
         "avoid": ["Sleepwalking because nothing's dramatic"],
