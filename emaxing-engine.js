@@ -13,10 +13,13 @@ const EMAXING_KEYS = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '11',
 
 function emaxingAdviceKey(n) {
   const k = String(n);
-  if (EMAXING_KEYS.has(k)) return k;
+  // Manuel's rule: there is NO pure 2 energy — a 2 reads as master 11 (life path,
+  // universal day, etc.). The only literal 2 anywhere is the calendar 2nd, which
+  // is handled in the day-of-month path, not here.
+  if (EMAXING_KEYS.has(k)) return k === '2' ? '11' : k;
   let x = Math.abs(parseInt(n, 10)) || 0;
   while (x > 9) x = String(x).split('').reduce((s, d) => s + Number(d), 0);
-  return String(x || 1);
+  return x === 2 ? '11' : String(x || 1);
 }
 
 // The four consumer profile numbers from a birth Date - nothing else. Uses only
@@ -39,6 +42,22 @@ function emaxingDigit1to9(n) {
   let x = Math.abs(parseInt(n, 10)) || 0;
   while (x > 9) x = String(x).split('').reduce((s, d) => s + Number(d), 0);
   return x;
+}
+
+// Reduce a number, but STOP on the master numbers 11/22/33 (they don't reduce).
+function emaxingReduceKeepMasters(n) {
+  n = Math.abs(parseInt(n, 10)) || 0;
+  while (n > 9 && n !== 11 && n !== 22 && n !== 33) {
+    n = String(n).split('').reduce((s, d) => s + Number(d), 0);
+  }
+  return n;
+}
+
+// Manuel's "there is no 2 energy" rule: a value that lands on a bare 2 reads as
+// master 11 — the ONE exception is where a literal 2 is allowed (the 2nd of the
+// month). Masters and all other values pass through untouched.
+function emaxingResolveTwo(reduced, allowLiteralTwo) {
+  return (reduced === 2 && !allowLiteralTwo) ? 11 : reduced;
 }
 
 // [SUPERSEDED by emaxingTwoNumberDaily] Single-number free daily, kept only for
@@ -85,14 +104,18 @@ function emaxingNumberBlock(numbers, compound, root) {
 function emaxingTwoNumberDaily(targetDate, content) {
   const cfg = (content && content.freeDaily) || {};
   const rawDay = targetDate.getDate();             // 1-31, the compound
-  const dayOfMonth = emaxingDigit1to9(rawDay);     // 1-9 root — drives scoring + classification
-  const dayCompound = rawDay > 9 ? (rawDay + '/' + dayOfMonth) : String(rawDay); // label, e.g. "13/4"
+  // Root drives scoring + classification. Keeps masters 11/22/33 and applies the
+  // "no pure 2" rule: 11th/20th/29th read as master 11; only the literal 2nd is a 2.
+  const dayOfMonth = emaxingResolveTwo(emaxingReduceKeepMasters(rawDay), rawDay === 2);
+  const dayCompound = (rawDay <= 9 || rawDay === dayOfMonth)
+    ? String(rawDay) : (rawDay + '/' + dayOfMonth); // label, e.g. "13/4", "20/11", "11"
   const universalInfo = compatLifePathInfo(targetDate);
-  // Universal axis keeps masters 11/22/33 and karmic 13, but folds 28 -> 1
-  // (Manuel's rule).
+  // Universal axis keeps masters 11/22/33 and karmic 13, folds 28 -> 1, and maps a
+  // bare 2 -> master 11 (same "no pure 2" rule; no literal-2nd exception here).
   let universalDay = universalInfo.lookupValue;
   let universalDisplay = universalInfo.display;
   if (universalDay === 28) { universalDay = 1; universalDisplay = '1'; }
+  if (universalDay === 2) { universalDay = 11; universalDisplay = '11'; }
   const universalRoot = emaxingDigit1to9(universalDay);
   const score = numerologyCompat(dayOfMonth, universalDay);
   const pairKey = dayOfMonth + 'x' + universalDay;
