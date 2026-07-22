@@ -350,10 +350,16 @@ function emaxingPersonalV2(birthDate, targetDate, content) {
     const score = numerologyCompat(dayBorn.num, dateN.num), dir = dirOf(score);
     layers.push({ id: 'dayBornVsDate', dir, sal: Math.abs(score - 50), beat: weave((IA.dayBornVsDate || {})[dir], numMap(dayBorn, dateN)), trap: dayBorn.block.trap });
   }
-  // 3. Cycles (macro->micro)
+  // 3. Cycles (macro->micro) — the beat NAMES each level's energy (never the
+  // number). Uses the compound personal-year/month/day, compound-first into `numbers`.
   {
     const cyc = emaxingCyclesRead(flow, harmonyMin, frictionMax);
-    layers.push({ id: 'cycles', dir: cyc.direction, sal: cyc.salience, beat: (IA.cycles || {})[cyc.classKey] || '', trap: lp.block.trap });
+    const mRaw = getPersonalMonthRaw(birthDate, targetDate);
+    const yE = emaxingNumEntity(numbers, getPersonalYearRaw(birthDate, targetDate), false).block.energy;
+    const mE = emaxingNumEntity(numbers, mRaw, false).block.energy;
+    const dE = emaxingNumEntity(numbers, getPersonalDayRaw(reduceNumber(mRaw), targetDate), false).block.energy;
+    layers.push({ id: 'cycles', dir: cyc.direction, sal: cyc.salience, trap: lp.block.trap,
+      beat: weave((IA.cycles || {})[cyc.classKey], { 'year.energy': yE, 'month.energy': mE, 'day.energy': dE }) });
   }
   // 4. Animals (composite of the salient year/month/day matchups)
   {

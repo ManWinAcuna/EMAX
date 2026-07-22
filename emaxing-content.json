@@ -11,12 +11,12 @@
     "6": { "energy": "love and responsibility", "move": "show up for your people and handle yours", "trap": "over-giving till you're empty, or calling laziness self-care" },
     "7": { "energy": "analysis and solitude", "move": "research, plan, go quiet, find the pattern", "trap": "overthinking into paralysis and isolating" },
     "8": { "energy": "power and money", "move": "make the power move and handle the money", "trap": "boom-and-bust — overreaching and burning out" },
-    "9": { "energy": "finishing and releasing", "move": "close loops and let go of what's done", "trap": "the itch to START — but 9 is endings, so it won't stick" },
+    "9": { "energy": "finishing and releasing", "move": "close loops and let go of what's done", "trap": "the itch to START — but this is endings energy, not starting energy, so it won't stick" },
     "11": { "energy": "magnetism and raw intuition", "move": "trust your gut and burn the intensity into a physical outlet", "trap": "the live wire torches you and everyone near you if you don't burn it clean" },
     "22": { "energy": "big vision made real", "move": "build the thing that outlasts you", "trap": "building everyone else's dream and ending up empty-handed" },
     "33": { "energy": "influence and teaching", "move": "share what you know and lift the room", "trap": "getting so far ahead you start looking down on people" },
     "13": { "energy": "hands-on creation", "move": "start it, make it your own, then put in the work to make it real", "trap": "falling for the idea and skipping the grind — no work, no creation" },
-    "28": { "energy": "starting and first moves (28 reduces to 1)", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" },
+    "28": { "energy": "starting and first moves", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" },
     "10": { "energy": "a clean fresh start", "move": "start the one thing, no baggage", "trap": "starting clean but never actually committing" },
     "12": { "energy": "creativity with people", "move": "make something and bring people into it", "trap": "waiting on the group instead of just starting" },
     "14": { "energy": "earned freedom", "move": "change it up, but keep the discipline that got you here", "trap": "freedom sliding into no discipline at all" },
@@ -332,7 +332,7 @@
         "friction": "The day's running {b.energy}, and that cuts against how you're built. You're wired for {a.energy}, but today keeps pulling the other way. Don't force your usual move — {b.move} instead, and let your instinct sit this one out."
       },
       "dayBornVsDate": {
-        "harmony": "There's a {b.energy} charge running under today too, and it clicks with how you naturally move. Good day to {a.move} — you're going with the current, not against it.",
+        "harmony": "There's a {b.energy} charge running under today, and it clicks with how you naturally move. Good day to {a.move} — you're going with the current, not against it.",
         "neutral": "There's a {b.energy} thread in the day, sitting fine next to how you operate. Nothing to fight, nothing to chase — just {a.move} at your own speed.",
         "friction": "There's a {b.energy} pull in the day that rubs against your natural style. You'd rather {a.move}, but the day's asking for something else. Bend a little today, don't dig in."
       },
@@ -359,14 +359,14 @@
           "friction": "and today throws a bit of {b.noun} at you that isn't your usual game, so keep your footing"
         }
       },
-      "cycles": {
-        "_note": "The macro→micro arc (personal year→month→day), condensed to ONE beat, keyed by the existing clash classKey. Source-hidden: 'the long game' = year, 'the stretch you're in' = month, 'today' = day.",
-        "allFavorable": "Bigger picture, everything's lined up for you right now — the long game, the stretch you're in, and today, all pointing the same way. That almost never happens. Whatever you've been holding off on, this is the window to move on it. Just don't expect it to build itself.",
-        "dayYearTrap": "Bigger picture, the long game you're playing is pointed one way, but today's pulling the exact opposite direction. This is the one to watch — one loud day isn't worth what you've been building for months. Feel the pull if you have to, but don't act on it.",
-        "monthYearTrap": "Bigger picture, the stretch you're in lately is telling a different story than the long game is. Don't rewrite the whole plan over one rough chapter. Ride it out and keep steering by where you're actually headed.",
-        "dayMonthTrap": "Bigger picture, you've had a good rhythm going lately, and today's just a little off-beat. Small stuff. Don't let one strange day knock you out of a groove that's been working.",
-        "allFriction": "Bigger picture, everything's running a bit heavy right now — the long game, the stretch you're in, and today, all pushing uphill at once. Not the day to force anything. Handle the small stuff, protect your energy, and wait for the turn. It always comes.",
-        "flow": "Bigger picture, nothing's really fighting right now — the long game, the stretch, and today are all just coexisting. No big push, no trap to dodge. Steady's the play, and it still adds up."
+      "cycles":       {
+        "_note": "The macro->micro arc, keyed by clash classKey. NAMES the actual energy of each level (hide the NUMBER, not the energy). Tokens {year.energy}/{month.energy}/{day.energy} = the energy of the person's personal year/month/day number (compound-aware lookup in `numbers`). 'your year'=personal year, 'this month'=personal month, 'today'=personal day; never say the number.",
+        "allFavorable": "Bigger picture, the whole chapter's working for you — your year's carrying {year.energy}, the month's got {month.energy} behind it, and today's leaning {day.energy}. All three pulling the same way, which almost never lines up. Whatever you've been holding off on, this is the window to move on it. Just don't expect it to build itself.",
+        "dayYearTrap": "Bigger picture, your year's about {year.energy} — that's the current that's been carrying you. But today pulls the opposite way, toward {day.energy}. That's the trap: one day pulling you toward {day.energy}, quietly stalling a whole year of momentum. Feel the pull if you have to, but don't act on it.",
+        "monthYearTrap": "Bigger picture, your year's about {year.energy}, but this whole month's been leaning {month.energy} — a different direction than the year wants. Don't rewrite the year over one off month. Ride the month out and keep steering toward {year.energy}.",
+        "dayMonthTrap": "Bigger picture, this month's been about {month.energy}, and it's been working. Today throws a little {day.energy} at you that cuts against that groove. Small stuff — don't let one day knock you off a month that's clicking. Stay with the {month.energy}.",
+        "allFriction": "Bigger picture, everything's heavy right now — your year's carrying {year.energy}, the month's on {month.energy}, and today's {day.energy}, all three pushing uphill at once. Not the day to force anything. Handle the small stuff, protect your energy, and wait for the turn. It always comes.",
+        "flow": "Bigger picture, nothing's really fighting — your year's about {year.energy}, the month's got {month.energy}, and today's {day.energy}, all just coexisting fine. No big push, no trap to dodge. Steady's the play, and it still adds up."
       }
     },
     "thresholds": { "harmonyMin": 70, "frictionMax": 40 },
