@@ -15,8 +15,26 @@
     "11": { "energy": "magnetism and raw intuition", "move": "trust your gut and burn the intensity into a physical outlet", "trap": "the live wire torches you and everyone near you if you don't burn it clean" },
     "22": { "energy": "big vision made real", "move": "build the thing that outlasts you", "trap": "building everyone else's dream and ending up empty-handed" },
     "33": { "energy": "influence and teaching", "move": "share what you know and lift the room", "trap": "getting so far ahead you start looking down on people" },
-    "13": { "energy": "building something that's actually yours", "move": "start it, make it your own, then put in the work to make it real", "trap": "falling for the idea and skipping the grind — no work, no creation" },
-    "28": { "energy": "starting and first moves (28 reduces to 1)", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" }
+    "13": { "energy": "hands-on creation", "move": "start it, make it your own, then put in the work to make it real", "trap": "falling for the idea and skipping the grind — no work, no creation" },
+    "28": { "energy": "starting and first moves (28 reduces to 1)", "move": "pick one thing and start it", "trap": "starting ten things and finishing none" },
+    "10": { "energy": "a clean fresh start", "move": "start the one thing, no baggage", "trap": "starting clean but never actually committing" },
+    "12": { "energy": "creativity with people", "move": "make something and bring people into it", "trap": "waiting on the group instead of just starting" },
+    "14": { "energy": "earned freedom", "move": "change it up, but keep the discipline that got you here", "trap": "freedom sliding into no discipline at all" },
+    "15": { "energy": "care on your own terms", "move": "show up for your people without disappearing into them", "trap": "giving so much you lose yourself in it" },
+    "16": { "energy": "deep inner focus", "move": "step back, study it, find the real answer", "trap": "the ego getting you humbled hard" },
+    "17": { "energy": "smart power", "move": "make the move, but let the plan lead", "trap": "outsmarting yourself and overplaying the hand" },
+    "18": { "energy": "a big finish", "move": "close the real chapter, not just the easy one", "trap": "clinging to the big thing past its time" },
+    "19": { "energy": "a self-made start", "move": "start it yourself, but close the old thing first", "trap": "starting new while the old one's still dragging behind you" },
+    "20": { "energy": "steady intuition", "move": "trust the read, move at your own pace", "trap": "waiting for certainty until the window closes" },
+    "21": { "energy": "bold self-expression", "move": "say it, post it, stop holding back", "trap": "hyping it up but never shipping it" },
+    "23": { "energy": "social freedom", "move": "get out there, connect, try the new thing", "trap": "chasing the shiny thing and dropping what mattered" },
+    "24": { "energy": "building for the people you love", "move": "put in the work that makes a real foundation", "trap": "over-building for everyone else and forgetting yourself" },
+    "25": { "energy": "hard-won wisdom", "move": "connect the dots, then move", "trap": "overthinking it into never moving" },
+    "26": { "energy": "power that lifts people", "move": "make the money move, and bring your people up with you", "trap": "the money running you instead of you running it" },
+    "27": { "energy": "wise release", "move": "let go of what's done, keep the lesson", "trap": "holding on out of habit long after it's over" },
+    "29": { "energy": "sharp closing intuition", "move": "trust the gut, let the old thing go", "trap": "the intensity turning inward and eating you up" },
+    "30": { "energy": "pure creative fire", "move": "create loud, be seen, connect", "trap": "so much noise nothing actually gets finished" },
+    "31": { "energy": "self-driven building", "move": "lead with the idea, then hammer it into something real", "trap": "all inspiration, no follow-through" }
   },
 
   "freeDaily": {
@@ -25,8 +43,8 @@
     "classTemplates": {
       "synergy": {
         "title": "🟢 Cheat Code Day",
-        "summary": "Day {dayOfMonth} × Universal {universalDay} — the code's cracked.",
-        "guidance": "Today's a {dayOfMonth} and the day underneath it is a {universalDay}, and for once they're both pulling the same direction. That's rare. When two energies line up like this there's nothing to fight through, so whatever you go for just moves.\n\nThis is the day to make the move you've been sitting on. {A.move} while the road's clear.\n\nDon't overthink it and don't waste it. A day where everything's already going your way doesn't come around often.",
+        "summary": "Day {dayCompound} × Universal {universalDay} — the code's cracked.",
+        "guidance": "Today's running {A.energy}, and the day underneath it's running {B.energy}, and for once they're both pulling the same direction. That's rare. When two energies line up like this there's nothing to fight through, so whatever you go for just moves.\n\nThis is the day to make the move you've been sitting on. {A.move} while the road's clear.\n\nDon't overthink it and don't waste it. A day where everything's already going your way doesn't come around often.",
         "focus": "Ride the glitch",
         "do": ["Go all-in while it's easy", "Stack wins — don't sit on it"],
         "avoid": ["Coasting and wasting a rare one"],
@@ -35,8 +53,8 @@
       },
       "flow": {
         "title": "⚪ Flow Day",
-        "summary": "Day {dayOfMonth} × Universal {universalDay} — clean lane, no drama.",
-        "guidance": "Nothing's really clashing today, but nothing's stacked in your favor either. It's just a clean, quiet day.\n\nThe {dayOfMonth} wants {A.energy} and the {universalDay} underneath has a little {B.energy} in it, and the two sit fine next to each other. No big move to make, no trap to dodge.\n\nJust {A.move} and keep it steady. These are the days that don't feel like much, but they quietly add up if you don't sleep on them.",
+        "summary": "Day {dayCompound} × Universal {universalDay} — clean lane, no drama.",
+        "guidance": "Nothing's really clashing today, but nothing's stacked in your favor either. It's just a clean, quiet day.\n\nThe date's leaning {A.energy} and the day underneath's got a little {B.energy} in it, and the two sit fine next to each other. No big move to make, no trap to dodge.\n\nJust {A.move} and keep it steady. These are the days that don't feel like much, but they quietly add up if you don't sleep on them.",
         "focus": "Just execute",
         "do": ["Steady reps — handle what's in front of you"],
         "avoid": ["Sleepwalking because nothing's dramatic"],
@@ -45,8 +63,8 @@
       },
       "trap": {
         "title": "🔴 Matrix Trap Day",
-        "summary": "Day {dayOfMonth} × Universal {universalDay} — read the fine print.",
-        "guidance": "Today's a {dayOfMonth}, so you're gonna feel that pull to {A.move}. That's just the {dayOfMonth} in you, and it feels completely right.\n\nBut here's the twist. The day underneath is a {universalDay}, and it wants the opposite. So that itch you're feeling is actually the trap. Everybody falls for it without noticing, then wonders later why nothing landed.\n\nDon't take the bait. Play the {universalDay} instead — {B.move} — and let the other thing wait for a day that'll actually hold it.",
+        "summary": "Day {dayCompound} × Universal {universalDay} — read the fine print.",
+        "guidance": "Today you're gonna feel a real pull to {A.move}. That's the date's energy talking, and it feels completely right.\n\nBut here's the twist. The day underneath it wants the opposite — it's running {B.energy}. So that itch you're feeling is actually the trap. Everybody falls for it without noticing, then wonders later why nothing landed.\n\nDon't take the bait. Play the day's real energy instead — {B.move} — and let the other thing wait for a day that'll actually hold it.",
         "focus": "Don't take the bait",
         "do": ["{B.move}", "Sit on the obvious move before you act"],
         "avoid": ["{A.move} on autopilot — that's the bait"],
@@ -55,8 +73,8 @@
       },
       "bestOfBoth": {
         "title": "🟡 Hardest to Farm",
-        "summary": "Day {dayOfMonth} × Universal {universalDay} — two worlds at once.",
-        "guidance": "Today's a {dayOfMonth}, pulling you toward {A.energy}. But there's a {universalDay} sitting right underneath it, and that's more about {B.energy}.\n\nSo the two don't really want the same thing, and that's exactly what makes today one of the hardest to farm. You gotta live in both worlds at once, and you don't get to pick one.\n\nSo you combine them. {A.move}, but do it {B.energy}-style. Pull both off and today pays double. Skip one and you get neither.",
+        "summary": "Day {dayCompound} × Universal {universalDay} — two worlds at once.",
+        "guidance": "Today's pulling you toward {A.energy}. But there's another current sitting right underneath it, and that one's more about {B.energy}.\n\nSo the two don't really want the same thing, and that's exactly what makes today one of the hardest to farm. You gotta live in both worlds at once, and you don't get to pick one.\n\nSo you combine them. {A.move}, but do it {B.energy}-style. Pull both off and today pays double. Skip one and you get neither.",
         "focus": "AND, not OR",
         "do": ["Do both at once — merge them", "{A.move} in a {B.energy} way"],
         "avoid": ["Going all-in on one and ghosting the other", "Freezing because you can't pick"],
@@ -271,6 +289,103 @@
     },
     "9": {
       "1": { "guidance": "[stub overlay] LP9 on a Personal Day 1: begin something that also gives back - your fresh start lands best with a cause behind it." }
+    }
+  },
+
+  "personalV2": {
+    "_note": "PAID v2 multi-layer synthesis library (Marketing-authored, Manuel's voice). SOURCE-HIDDEN: a read NEVER names a number, animal, sign, season, or 'personal year'. Vibe blocks are source-free, STRENGTH-framed energy in TWO forms: {noun} = a bare noun with NO article (works after 'your' and after 'there's' — e.g. 'your calm', 'there's momentum') + {adj} = adjective cluster. Convention: {a.*} = the person, {b.*} = today/current, every layer. Number layers (lifePathVsUniversal, dayBornVsDate, cycles) reuse the top-level `numbers` map's {energy}/{move}/{trap}. RESPECT-THE-ENERGY lens: the vibe is always a strength the person would be proud to hear ('softness'/'needy'/'slippery' etc. are banned); only the TRAP line stays blunt about the weak spot. BATCH 1 = vibes; interaction templates + connect + bottomLine + trap follow in later batches.",
+    "vibes": {
+      "animals": {
+        "Rat":     { "noun": "sharpness",     "adj": "sharp, quick, a step ahead" },
+        "Ox":      { "noun": "staying power",  "adj": "steady, dependable, built to outlast" },
+        "Tiger":   { "noun": "boldness",       "adj": "bold, fearless, all-in" },
+        "Cat":     { "noun": "independence",   "adj": "independent, self-possessed, unbothered" },
+        "Dragon":  { "noun": "presence",       "adj": "magnetic, commanding, larger than life" },
+        "Snake":   { "noun": "depth",          "adj": "patient, sharp, three moves ahead" },
+        "Horse":   { "noun": "drive",          "adj": "free, restless, always moving" },
+        "Goat":    { "noun": "calm",           "adj": "calm, creative, unhurried" },
+        "Monkey":  { "noun": "wit",            "adj": "clever, quick, playful" },
+        "Rooster": { "noun": "honesty",        "adj": "sharp-eyed, straight-up, exacting" },
+        "Dog":     { "noun": "loyalty",        "adj": "loyal, fair, protective" },
+        "Pig":     { "noun": "generosity",     "adj": "generous, warm, easygoing" }
+      },
+      "signs": {
+        "Aries":       { "noun": "fire",       "adj": "fiery, bold, first out the gate" },
+        "Taurus":      { "noun": "steadiness", "adj": "grounded, patient, immovable" },
+        "Gemini":      { "noun": "quickness",  "adj": "quick, curious, sharp with words" },
+        "Cancer":      { "noun": "intuition",  "adj": "protective, intuitive, deeply loyal" },
+        "Leo":         { "noun": "warmth",     "adj": "bright, proud, magnetic" },
+        "Virgo":       { "noun": "precision",  "adj": "precise, practical, misses nothing" },
+        "Libra":       { "noun": "balance",    "adj": "balanced, charming, fair" },
+        "Scorpio":     { "noun": "intensity",  "adj": "intense, deep, all-or-nothing" },
+        "Sagittarius": { "noun": "reach",      "adj": "adventurous, honest, always reaching for more" },
+        "Capricorn":   { "noun": "discipline", "adj": "driven, disciplined, built to last" },
+        "Aquarius":    { "noun": "vision",     "adj": "independent, original, ahead of the curve" },
+        "Pisces":      { "noun": "imagination","adj": "intuitive, creative, deeply tuned in" }
+      }
+    },
+    "interaction": {
+      "_note": "Beat templates per layer × direction (harmony/neutral/friction). {a.*}=person, {b.*}=today. Number layers use {a.energy}/{a.move}/{b.energy}/{b.move} from `numbers`; animal/sign layers use {a.noun}/{a.adj}/{b.noun}/{b.adj} from vibes. Full beats = 2-4 sentences; animals fragments = one clause each, engine weaves the salient ones into ONE beat. Source-hidden throughout. cycles beat + connect/bottomLine/trap authored in next batch.",
+      "lifePathVsUniversal": {
+        "harmony": "The day's running {b.energy}, and that lines up with how you're built. You're wired for {a.energy}, so today rewards exactly what comes natural to you. Lean in — {a.move}, and the day carries it.",
+        "neutral": "The day's running {b.energy}, and it neither fights you nor feeds you. You run on {a.energy}, and today just lets you do that without much push either way. Just {a.move} and don't overthink it.",
+        "friction": "The day's running {b.energy}, and that cuts against how you're built. You're wired for {a.energy}, but today keeps pulling the other way. Don't force your usual move — {b.move} instead, and let your instinct sit this one out."
+      },
+      "dayBornVsDate": {
+        "harmony": "There's a {b.energy} charge running under today too, and it clicks with how you naturally move. Good day to {a.move} — you're going with the current, not against it.",
+        "neutral": "There's a {b.energy} thread in the day, sitting fine next to how you operate. Nothing to fight, nothing to chase — just {a.move} at your own speed.",
+        "friction": "There's a {b.energy} pull in the day that rubs against your natural style. You'd rather {a.move}, but the day's asking for something else. Bend a little today, don't dig in."
+      },
+      "western": {
+        "harmony": "And the whole mood right now leans {b.adj}, which suits you. Let your {a.noun} lead — the season's right there with you.",
+        "neutral": "The season's got a {b.adj} feel to it, nothing that clashes with your {a.noun}. Just background weather today.",
+        "friction": "The mood right now runs {b.adj}, and that's not quite your speed. You lead with your {a.noun}, and the season's pushing a different tempo. Ride it out, don't fight it."
+      },
+      "animals": {
+        "_note": "SHORT fragments (one clause). Engine weaves only the salient of year/month/day into one composite beat with connectors. a=person's animal, b=current animal.",
+        "year": {
+          "harmony": "there's {b.noun} in the air right now that suits you, and you can ride it without losing your {a.noun}",
+          "neutral": "there's a {b.adj} feel to things lately that sits fine with your {a.noun}",
+          "friction": "there's {b.noun} in the air lately that rubs against your {a.noun}, not your favorite backdrop but it passes"
+        },
+        "month": {
+          "harmony": "the stretch you're in plays to your {a.noun}, {b.adj} energy all around that you can actually use",
+          "neutral": "this stretch is quiet on that front, {b.adj} but nothing that moves your needle",
+          "friction": "there's a lot of {b.noun} going around this stretch, and that's not your style, so expect a little friction, people testing you"
+        },
+        "day": {
+          "harmony": "and today you're right in your element — {a.adj} — so lean on it",
+          "neutral": "and today's neutral on that front, just do your thing",
+          "friction": "and today throws a bit of {b.noun} at you that isn't your usual game, so keep your footing"
+        }
+      },
+      "cycles": {
+        "_note": "The macro→micro arc (personal year→month→day), condensed to ONE beat, keyed by the existing clash classKey. Source-hidden: 'the long game' = year, 'the stretch you're in' = month, 'today' = day.",
+        "allFavorable": "Bigger picture, everything's lined up for you right now — the long game, the stretch you're in, and today, all pointing the same way. That almost never happens. Whatever you've been holding off on, this is the window to move on it. Just don't expect it to build itself.",
+        "dayYearTrap": "Bigger picture, the long game you're playing is pointed one way, but today's pulling the exact opposite direction. This is the one to watch — one loud day isn't worth what you've been building for months. Feel the pull if you have to, but don't act on it.",
+        "monthYearTrap": "Bigger picture, the stretch you're in lately is telling a different story than the long game is. Don't rewrite the whole plan over one rough chapter. Ride it out and keep steering by where you're actually headed.",
+        "dayMonthTrap": "Bigger picture, you've had a good rhythm going lately, and today's just a little off-beat. Small stuff. Don't let one strange day knock you out of a groove that's been working.",
+        "allFriction": "Bigger picture, everything's running a bit heavy right now — the long game, the stretch you're in, and today, all pushing uphill at once. Not the day to force anything. Handle the small stuff, protect your energy, and wait for the turn. It always comes.",
+        "flow": "Bigger picture, nothing's really fighting right now — the long game, the stretch, and today are all just coexisting. No big push, no trap to dodge. Steady's the play, and it still adds up."
+      }
+    },
+    "thresholds": { "harmonyMin": 70, "frictionMax": 40 },
+    "salience": { "floor": 13, "minBeats": 3, "maxBeats": 5 },
+    "connect": {
+      "_note": "Engine prepends between beats (owns capitalization/placement). agree = layers reinforcing, contrast = layers pulling opposite.",
+      "agree": ["On top of that, ", "And there's more — ", "That tracks, because "],
+      "contrast": ["That said, ", "At the same time though, ", "Here's the flip side — "]
+    },
+    "bottomLine": {
+      "_note": "Synthesized close, keyed by net tone across surfaced beats.",
+      "harmonious": "Bottom line: the day's mostly on your side. Move with it instead of sitting on it, and let the good energy carry its part while you carry yours.",
+      "mixed": "Bottom line: today's a mixed bag. Some of it's with you, some of it isn't. Lean where it's working, ease off where it's fighting you, and don't force the parts that don't want to move.",
+      "challenging": "Bottom line: today's asking a lot and not handing much back. Don't force it. Protect your energy, handle what's right in front of you, and let the heavy stuff pass through."
+    },
+    "trap": {
+      "_note": "fromFrictionLayer draws {a.trap} from the most-salient FRICTION number layer (lifePath/dayBorn/cycles). noFriction fallback when nothing's in real friction.",
+      "fromFrictionLayer": "Your trap today: {a.trap}. And the day's set up to walk you right into it.",
+      "noFriction": "No real trap today — nothing's fighting you hard enough to matter. The only way to waste a day like this is to sit on it."
     }
   }
 }

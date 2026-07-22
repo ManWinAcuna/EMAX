@@ -263,3 +263,170 @@ function emaxingPersonalDaily(birthDate, targetDate, content) {
     personalYear: flow.numerology.personalYear,
   };
 }
+
+/* ============================================================================
+   PAID v2 — multi-layer, source-HIDDEN "friend who just knows" synthesis.
+   Reads content.personalV2. Five layers each yield a compat DIRECTION
+   (harmony/neutral/friction) + SALIENCE (|score-50|). The salient ones surface
+   in FIXED narrative order (lifePath → dayBorn → cycles → animals → western),
+   weave source-free vibe blocks, and close with a net-tone bottom line + the
+   personalized trap. NEVER names a number, animal, sign, season, or cycle.
+   ============================================================================ */
+
+// Number entity for a "compound" value: {num} for scoring (masters kept, no-2),
+// {block} the compound-first vibe block from `numbers`. allowLiteralTwo lets the
+// literal 2nd-of-month stay a 2 (day-of-month layers); elsewhere a bare 2 -> 11.
+function emaxingNumEntity(numbers, compoundValue, allowLiteralTwo) {
+  let cv = compoundValue;
+  if (cv === 2 && !allowLiteralTwo) cv = 11;
+  const root = emaxingResolveTwo(emaxingReduceKeepMasters(cv), allowLiteralTwo && cv === 2);
+  return { num: root, block: emaxingNumberBlock(numbers, cv, root) };
+}
+
+// The cycles layer: the existing macro->micro clash model, returning its classKey
+// (which picks the authored cycles beat) + a direction + a salience proxy.
+function emaxingCyclesRead(flow, favMin, frictionMin) {
+  const n = flow.numerology, v = flow.vietnamese;
+  const blend = (a, b) => 0.65 * a + 0.35 * b;
+  const s = { year: blend(n.yearScore, v.yearScore), month: blend(n.monthScore, v.monthScore), day: blend(n.dayScore, v.daySignScore) };
+  const band = (x) => x >= favMin ? 'FAV' : (x < frictionMin ? 'FRI' : 'NEU');
+  const b = { year: band(s.year), month: band(s.month), day: band(s.day) };
+  const clash = (x, y) => (b[x] === 'FAV' && b[y] === 'FRI') || (b[x] === 'FRI' && b[y] === 'FAV');
+  let classKey, direction;
+  if (b.year === 'FAV' && b.month === 'FAV' && b.day === 'FAV') { classKey = 'allFavorable'; direction = 'harmony'; }
+  else if (b.year === 'FRI' && b.month === 'FRI' && b.day === 'FRI') { classKey = 'allFriction'; direction = 'friction'; }
+  else if (clash('day', 'year')) { classKey = 'dayYearTrap'; direction = 'friction'; }
+  else if (clash('month', 'year')) { classKey = 'monthYearTrap'; direction = 'friction'; }
+  else if (clash('day', 'month')) { classKey = 'dayMonthTrap'; direction = 'friction'; }
+  else { classKey = 'flow'; direction = 'neutral'; }
+  return { classKey, direction, salience: Math.max(Math.abs(s.year - 50), Math.abs(s.month - 50), Math.abs(s.day - 50)) };
+}
+
+function emaxingCap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+function emaxingPersonalV2(birthDate, targetDate, content) {
+  const cfg = (content && content.personalV2) || {};
+  const numbers = (content && content.numbers) || {};
+  const IA = cfg.interaction || {};
+  const animalVibes = (cfg.vibes && cfg.vibes.animals) || {};
+  const signVibes = (cfg.vibes && cfg.vibes.signs) || {};
+  const th = cfg.thresholds || {};
+  const harmonyMin = th.harmonyMin != null ? th.harmonyMin : 70;
+  const frictionMax = th.frictionMax != null ? th.frictionMax : 40;
+  const scfg = cfg.salience || {};
+  const floor = scfg.floor != null ? scfg.floor : 13;
+  const minBeats = scfg.minBeats != null ? scfg.minBeats : 3;
+  const maxBeats = scfg.maxBeats != null ? scfg.maxBeats : 5;
+
+  const flow = computeEnergyFlow(birthDate, targetDate);
+  const viet = flow.vietnamese;
+  const dirOf = (s) => s >= harmonyMin ? 'harmony' : (s < frictionMax ? 'friction' : 'neutral');
+  // Replace tokens; blank the beat if anything unresolved is left OR if a DIGIT
+  // slips through — source-hiding is a hard rule, so a stray number drops the beat
+  // rather than ever reaching the reader.
+  const weave = (tpl, map) => {
+    if (typeof tpl !== 'string') return '';
+    const out = tpl.replace(/\{([\w.]+)\}/g, (m, k) => (map[k] != null ? map[k] : m));
+    return (/\{[\w.]+\}/.test(out) || /[0-9]/.test(out)) ? '' : out;
+  };
+
+  // Entities
+  const lpVal = compatLifePathInfo(birthDate).lookupValue;
+  let uVal = compatLifePathInfo(targetDate).lookupValue; if (uVal === 28) uVal = 1;
+  const lp = emaxingNumEntity(numbers, lpVal, false);
+  const uni = emaxingNumEntity(numbers, uVal, false);
+  const dayBorn = emaxingNumEntity(numbers, birthDate.getDate(), true);
+  const dateN = emaxingNumEntity(numbers, targetDate.getDate(), true);
+  const numMap = (a, b) => ({ 'a.energy': a.block.energy, 'a.move': a.block.move, 'a.trap': a.block.trap, 'b.energy': b.block.energy, 'b.move': b.block.move, 'b.trap': b.block.trap });
+
+  const layers = [];
+  // 1. Life Path × Universal Day
+  {
+    const score = numerologyCompat(lp.num, uni.num), dir = dirOf(score);
+    layers.push({ id: 'lifePathVsUniversal', dir, sal: Math.abs(score - 50), beat: weave((IA.lifePathVsUniversal || {})[dir], numMap(lp, uni)), trap: lp.block.trap });
+  }
+  // 2. Day Born × Day-of-month
+  {
+    const score = numerologyCompat(dayBorn.num, dateN.num), dir = dirOf(score);
+    layers.push({ id: 'dayBornVsDate', dir, sal: Math.abs(score - 50), beat: weave((IA.dayBornVsDate || {})[dir], numMap(dayBorn, dateN)), trap: dayBorn.block.trap });
+  }
+  // 3. Cycles (macro->micro)
+  {
+    const cyc = emaxingCyclesRead(flow, harmonyMin, frictionMax);
+    layers.push({ id: 'cycles', dir: cyc.direction, sal: cyc.salience, beat: (IA.cycles || {})[cyc.classKey] || '', trap: lp.block.trap });
+  }
+  // 4. Animals (composite of the salient year/month/day matchups)
+  {
+    const subs = [
+      { key: 'year', a: viet.personalYearSign, b: viet.universalYearSign, score: viet.yearScore },
+      { key: 'month', a: viet.personalMonthSign, b: viet.universalMonthSign, score: viet.monthScore },
+      { key: 'day', a: viet.personalDaySign, b: viet.universalDaySign, score: viet.daySignScore },
+    ];
+    const frags = []; let maxSal = 0, domDir = 'neutral', domSal = -1;
+    subs.forEach((sb) => {
+      const sal = Math.abs(sb.score - 50); if (sal > maxSal) maxSal = sal;
+      if (sal >= floor) {
+        const dir = dirOf(sb.score), av = animalVibes[sb.a] || {}, bv = animalVibes[sb.b] || {};
+        const frag = weave(((IA.animals || {})[sb.key] || {})[dir], { 'a.noun': av.noun, 'a.adj': av.adj, 'b.noun': bv.noun, 'b.adj': bv.adj });
+        if (frag) frags.push(frag.trim());
+        if (sal > domSal) { domSal = sal; domDir = dir; }
+      }
+    });
+    const beat = frags.map((f) => emaxingCap(f)).join('. ');
+    layers.push({ id: 'animals', dir: domDir, sal: maxSal, beat: beat ? beat + '.' : '' });
+  }
+  // 5. Western (season / sun sign)
+  {
+    const a = getSunSign(birthDate), b = getSunSign(targetDate);
+    const score = westernCompat(a, b), dir = dirOf(score);
+    const av = signVibes[a] || {}, bv = signVibes[b] || {};
+    layers.push({ id: 'western', dir, sal: Math.abs(score - 50), beat: weave((IA.western || {})[dir], { 'a.noun': av.noun, 'a.adj': av.adj, 'b.noun': bv.noun, 'b.adj': bv.adj }) });
+  }
+
+  // Selection: present = salient + has a beat; pad to minBeats by salience; cap at maxBeats.
+  const withBeat = layers.filter((l) => l.beat);
+  let present = withBeat.filter((l) => l.sal >= floor);
+  if (present.length < minBeats) {
+    const extra = withBeat.filter((l) => present.indexOf(l) === -1).sort((x, y) => y.sal - x.sal);
+    present = present.concat(extra.slice(0, minBeats - present.length));
+  }
+  if (present.length > maxBeats) {
+    const keep = present.slice().sort((x, y) => y.sal - x.sal).slice(0, maxBeats);
+    present = present.filter((l) => keep.indexOf(l) !== -1);
+  }
+  const ORDER = ['lifePathVsUniversal', 'dayBornVsDate', 'cycles', 'animals', 'western'];
+  present.sort((a, b) => ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+
+  // Net tone across surfaced beats
+  let hN = 0, fN = 0;
+  present.forEach((l) => { if (l.dir === 'harmony') hN++; else if (l.dir === 'friction') fN++; });
+  const tone = hN > fN ? 'harmonious' : (fN > hN ? 'challenging' : 'mixed');
+
+  // Assemble; clean a leading "And " on the opener so it doesn't dangle.
+  const beats = present.map((l) => l.beat.trim());
+  if (beats.length) beats[0] = emaxingCap(beats[0].replace(/^And\s+/i, ''));
+  const bottom = (cfg.bottomLine || {})[tone] || '';
+
+  // Trap: the most-salient FRICTION number layer (lifePath/dayBorn/cycles).
+  const trapCands = present.filter((l) => l.dir === 'friction' && l.trap).sort((a, b) => b.sal - a.sal);
+  let trapText;
+  if (trapCands.length) {
+    trapText = ((cfg.trap || {}).fromFrictionLayer || '').replace(/\{a\.trap\}/g, trapCands[0].trap);
+    // Same hard rule for the trap line — a leftover token or a digit falls back.
+    if (/\{[\w.]+\}/.test(trapText) || /[0-9]/.test(trapText)) trapText = (cfg.trap || {}).noFriction || '';
+  } else {
+    trapText = (cfg.trap || {}).noFriction || '';
+  }
+  // emaAdviceHtml supplies its own "Today's trap" label — strip the authored prefix.
+  const trapForEntry = trapText.replace(/^Your trap today:\s*/i, '');
+
+  const guidance = beats.concat(bottom ? [bottom] : []).join('\n\n');
+  const DAYTYPE = { harmonious: 'cheat', mixed: 'flow', challenging: 'trap' };
+
+  return {
+    entry: { title: 'Today, for you', guidance, trap: trapForEntry },
+    tone,
+    daytype: DAYTYPE[tone] || 'flow',
+    surfaced: present.map((l) => l.id),
+  };
+}

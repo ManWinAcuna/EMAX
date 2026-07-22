@@ -69,9 +69,9 @@ function emaRenderPersonal(birthDate) {
   }
 
   el.classList.remove('locked');
-  const r = emaxingPersonalDaily(birthDate, today, emaxingContent);
-  el.setAttribute('data-daytype', emaPaidDaytype(r.classKey)); // day-type banner hook
-  // No numbers/scores shown — "hidden soup" rule: the reading is the whole product.
+  const r = emaxingPersonalV2(birthDate, today, emaxingContent);
+  el.setAttribute('data-daytype', r.daytype); // day-type banner hook (from net tone)
+  // No numbers/scores shown — "hidden soup" rule: the synthesized read is the whole product.
   el.innerHTML = `
     <div class="ema-card-eyebrow">Your Personal Guidance · Today</div>
     ${emaAdviceHtml(r.entry)}`;
