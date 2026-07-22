@@ -92,6 +92,49 @@ function emaShowSetup() {
   document.getElementById('emaSetup').style.display = '';
 }
 
+/* ---- Birthday picker: tap month, tap day, type year (no native calendar) ---- */
+
+function emaDaysInMonth(month, year) {
+  if (!month) return 31;
+  // 2000 is a leap year, so Feb 29 stays selectable before a year is typed.
+  return new Date(year || 2000, month, 0).getDate();
+}
+
+// Rebuild the day options for the chosen month/year, keeping the picked day if it
+// still exists (a 31 chosen then switched to Feb just resets to the placeholder).
+function emaPopulateDays() {
+  const daySel = document.getElementById('emaBdayDay');
+  const month = Number(document.getElementById('emaBdayMonth').value) || 0;
+  const year = Number(document.getElementById('emaBdayYear').value) || 0;
+  const prev = daySel.value;
+  const n = emaDaysInMonth(month, year);
+  const keep = prev && Number(prev) <= n;
+  let html = `<option value="" disabled${keep ? '' : ' selected'}>Day</option>`;
+  for (let d = 1; d <= n; d++) html += `<option value="${d}"${keep && Number(prev) === d ? ' selected' : ''}>${d}</option>`;
+  daySel.innerHTML = html;
+}
+
+function emaSetBdayFields(iso) {
+  const p = String(iso || '').split('-').map(Number);
+  if (p.length !== 3 || !p[0]) return;
+  document.getElementById('emaBdayYear').value = p[0];
+  document.getElementById('emaBdayMonth').value = String(p[1]);
+  emaPopulateDays();
+  document.getElementById('emaBdayDay').value = String(p[2]);
+}
+
+// Returns 'YYYY-MM-DD' if the three fields form a real, non-future date, else null.
+function emaReadBdayFields() {
+  const month = Number(document.getElementById('emaBdayMonth').value) || 0;
+  const day = Number(document.getElementById('emaBdayDay').value) || 0;
+  const year = Number(document.getElementById('emaBdayYear').value) || 0;
+  if (!month || !day || !year || year < 1900 || year > new Date().getFullYear()) return null;
+  const dt = new Date(year, month - 1, day);
+  if (dt.getFullYear() !== year || dt.getMonth() !== month - 1 || dt.getDate() !== day) return null; // rolled over
+  if (dt > new Date()) return null; // future
+  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+}
+
 async function emaInit() {
   try {
     emaxingContent = await (await fetch('emaxing-content.json')).json();
@@ -99,19 +142,25 @@ async function emaInit() {
     // keep the empty default; UI shows "coming soon" placeholders
   }
 
-  const input = document.getElementById('emaBdayInput');
-  input.max = new Date().toISOString().slice(0, 10); // no future birthdays
+  emaPopulateDays();
+  document.getElementById('emaBdayMonth').addEventListener('change', emaPopulateDays);
+  document.getElementById('emaBdayYear').addEventListener('input', emaPopulateDays);
 
   document.getElementById('emaBdayForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    const v = input.value;
-    if (!v) return;
-    try { localStorage.setItem(EMAXING_BDAY_KEY, v); } catch (err) { /* ignore */ }
-    emaShowApp(v);
+    const iso = emaReadBdayFields();
+    const err = document.getElementById('emaBdayError');
+    if (!iso) { if (err) err.textContent = 'Pick your month, day, and year.'; return; }
+    if (err) err.textContent = '';
+    try { localStorage.setItem(EMAXING_BDAY_KEY, iso); } catch (err2) { /* ignore */ }
+    emaShowApp(iso);
   });
 
   document.getElementById('emaChangeBday').addEventListener('click', (e) => {
     e.preventDefault();
+    let saved = null;
+    try { saved = localStorage.getItem(EMAXING_BDAY_KEY); } catch (e2) { /* ignore */ }
+    if (saved) emaSetBdayFields(saved);
     emaShowSetup();
   });
 
@@ -125,7 +174,7 @@ async function emaInit() {
 
   let saved = null;
   try { saved = localStorage.getItem(EMAXING_BDAY_KEY); } catch (e) { /* ignore */ }
-  if (saved) { input.value = saved; emaShowApp(saved); } else { emaShowSetup(); }
+  if (saved) { emaSetBdayFields(saved); emaShowApp(saved); } else { emaShowSetup(); }
 }
 
 document.addEventListener('DOMContentLoaded', emaInit);

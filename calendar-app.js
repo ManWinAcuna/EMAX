@@ -7,8 +7,16 @@ let emaxingContent = { numbers: {}, freeDaily: {} };
 let emaCalYear;   // month in view
 let emaCalMonth;
 let emaSelected;  // selected Date (local midnight)
+let emaCalBirthDate = null;  // saved birthday, for the personalized paid reading
 
 function emaMidnight(d) { const x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
+function emaParseBday(iso) {
+  if (!iso) return null;
+  const p = String(iso).split('-').map(Number);
+  if (p.length !== 3 || !p[0]) return null;
+  const d = new Date(); d.setFullYear(p[0], p[1] - 1, p[2]); d.setHours(0, 0, 0, 0);
+  return d;
+}
 function emaSameDay(a, b) {
   return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 }
@@ -47,19 +55,76 @@ function emaRenderCalDetail() {
     ${emaAdviceHtml(daily.entry)}`;
 }
 
+// The personalized (paid) reading for the selected day — gated exactly like the
+// profile card: no birthday -> prompt; not a subscriber -> locked teaser; else the
+// real source-hidden v2 read for that date.
+function emaRenderCalPersonal() {
+  const el = document.getElementById('emaCalPersonal');
+  if (!el) return;
+  const label = emaSelected.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
+
+  if (!emaCalBirthDate) {
+    el.classList.remove('locked');
+    el.removeAttribute('data-daytype');
+    el.innerHTML = `
+      <div class="ema-card-eyebrow">Your Personal Guidance</div>
+      <p class="ema-guidance">Set your birthday on your profile to unlock your personalized reading for any day.</p>
+      <a class="ema-foot-link" href="index.html">Go to your profile &rarr;</a>`;
+    return;
+  }
+
+  const subbed = (typeof emaxingIsSubscriber === 'function') && emaxingIsSubscriber();
+  if (!subbed) {
+    el.classList.add('locked');
+    el.removeAttribute('data-daytype');
+    const teaser = {
+      title: 'Your Personal Guidance',
+      summary: "A reading tuned to your exact chart and this day's energy.",
+      guidance: 'Unlock to see your personalized reading for any day on the calendar — matched to your full profile.',
+    };
+    el.innerHTML = `
+      <div class="ema-card-eyebrow">Your Personal Guidance &middot; ${emaEsc(label)}</div>
+      <div class="ema-lock">
+        <div class="ema-lock-blur" aria-hidden="true">${emaAdviceHtml(teaser)}</div>
+        <div class="ema-lock-overlay">
+          <div class="ema-lock-icon">🔒</div>
+          <div class="ema-lock-title">Personalized daily guidance</div>
+          <div class="ema-lock-sub">Your exact reading for any day, tuned to your profile.</div>
+          <button class="ema-btn ema-unlock" id="emaUnlockBtn">Unlock &middot; $4.90/mo</button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  el.classList.remove('locked');
+  const r = emaxingPersonalV2(emaCalBirthDate, emaSelected, emaxingContent);
+  el.setAttribute('data-daytype', r.daytype);
+  el.innerHTML = `
+    <div class="ema-card-eyebrow">Your Personal Guidance &middot; ${emaEsc(label)}</div>
+    ${emaAdviceHtml(r.entry)}`;
+}
+
 function emaSelect(date) {
   emaSelected = emaMidnight(date);
   emaRenderCalendar();
   emaRenderCalDetail();
+  emaRenderCalPersonal();
 }
 
 async function emaCalInit() {
   try { emaxingContent = await (await fetch('emaxing-content.json')).json(); } catch (e) { /* placeholders */ }
+  try { emaCalBirthDate = emaParseBday(localStorage.getItem('emaxing_birthday')); } catch (e) { /* ignore */ }
 
   const today = emaMidnight(new Date());
   emaCalYear = today.getFullYear();
   emaCalMonth = today.getMonth();
   emaSelected = today;
+
+  // Re-render the paid card when auth/subscription changes (sign-in, unlock, etc.).
+  window.emaxingOnSubscriptionChange = () => emaRenderCalPersonal();
+  document.body.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'emaUnlockBtn' && typeof emaxingHandleUnlock === 'function') emaxingHandleUnlock();
+  });
 
   document.getElementById('emaCalPrev').addEventListener('click', () => {
     emaCalMonth--; if (emaCalMonth < 0) { emaCalMonth = 11; emaCalYear--; } emaRenderCalendar();
@@ -80,6 +145,7 @@ async function emaCalInit() {
 
   emaRenderCalendar();
   emaRenderCalDetail();
+  emaRenderCalPersonal();
 }
 
 document.addEventListener('DOMContentLoaded', emaCalInit);
